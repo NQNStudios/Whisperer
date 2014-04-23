@@ -1,0 +1,3 @@
+[submodule "ASCIILib"]
+	path = ASCIILib
+	url = https://github.com/Natman64/ASCIILib
