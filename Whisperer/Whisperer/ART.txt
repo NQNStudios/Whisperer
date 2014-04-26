@@ -4,7 +4,7 @@ COLORS
 INFO CODES
 # wall
 IMAGES
-test glyph.bmp
+test glyph.bmp 255 255 255
 SIZE
 40 21
 CHARACTERS
@@ -119,3 +119,4 @@ SPECIAL INFO
                                         
 IMAGES
 test 5 5
+test 24 6
