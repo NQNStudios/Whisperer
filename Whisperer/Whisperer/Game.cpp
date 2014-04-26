@@ -30,7 +30,8 @@ void Game::Run()
 {
 	ascii::Graphics graphics(kWindowTitle, kWindowWidth, kWindowHeight);
 
-	LoadContent(graphics);
+	cache = graphics.createImageCache();
+	LoadContent(cache);
 
 	ascii::Input input;
 
@@ -84,9 +85,23 @@ void Game::Quit()
 	mRunning = false;
 }
 
-void Game::LoadContent(ascii::Graphics& graphics)
+void Game::LoadContent(ascii::ImageCache* cache)
 {
-	image = graphics.loadTexture("glyph.bmp");
+	surface = ascii::Surface::FromFile("ART.txt", cache);
+
+	std::string specialInfo;
+	for (int x = 0; x < surface->width(); ++x)
+	{
+		for (int y = 0; y < surface->height(); ++y)
+		{
+			specialInfo = surface->getSpecialInfo(x, y);
+
+			if (!specialInfo.empty())
+			{
+				std::cout << "Special info at (" << x << ", " << y << ": " << specialInfo << std::endl;
+			}
+		}
+	}
 }
 
 void Game::Update(int deltaMS)
@@ -103,9 +118,7 @@ void Game::Draw(ascii::Graphics& graphics)
 {
 	graphics.clear();
 
-	graphics.drawBorder(' ', ascii::Color::Yellow, ascii::Color::Black);
+	graphics.blitSurface(surface, 0, 0);
 
-	graphics.blitTexture(image, 1, 1);
-	
 	graphics.update();
 }

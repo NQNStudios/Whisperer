@@ -4,6 +4,7 @@
 
 #include "Input.h"
 #include "Graphics.h"
+#include "ImageCache.h"
 
 ///<summary>
 /// Game class for The Whisperer in Darkness.
@@ -30,7 +31,7 @@ class Game
 		///<summary>
 		/// Loads all of the game's assets.
 		///</summary>
-		void LoadContent(ascii::Graphics& graphics);
+		void LoadContent(ascii::ImageCache* cache);
 
 		///<summary>
 		/// Handles the game's update logic.
@@ -47,7 +48,10 @@ class Game
 		///</summary>
 		void Draw(ascii::Graphics& graphics);
 
-		SDL_Texture* image;
+		ascii::ImageCache* cache;
 
 		bool mRunning;
+
+		//Game-specific fields
+		ascii::Surface* surface;
 };
