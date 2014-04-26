@@ -23,6 +23,8 @@ Game::Game()
 
 Game::~Game()
 {
+	delete cache;
+
 	SDL_Quit();
 }
 
