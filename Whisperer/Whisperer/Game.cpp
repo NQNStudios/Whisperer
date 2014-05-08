@@ -89,21 +89,7 @@ void Game::Quit()
 
 void Game::LoadContent(ascii::ImageCache* cache)
 {
-	surface = ascii::Surface::FromFile("ART.txt", cache);
-
-	std::string specialInfo;
-	for (int x = 0; x < surface->width(); ++x)
-	{
-		for (int y = 0; y < surface->height(); ++y)
-		{
-			specialInfo = surface->getSpecialInfo(x, y);
-
-			if (!specialInfo.empty())
-			{
-				std::cout << "Special info at (" << x << ", " << y << ": " << specialInfo << std::endl;
-			}
-		}
-	}
+	surface = ascii::Surface::FromFile("MySurface.srf", cache);
 }
 
 void Game::Update(int deltaMS)
