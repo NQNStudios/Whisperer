@@ -9,7 +9,7 @@ ascii::Surface* gSurface;
 
 void LoadContent(ascii::ImageCache* cache)
 {
-	gSurface = ascii::Surface::FromFile("ART.txt", cache);
+	gSurface = ascii::Surface::FromFile("MySurface.srf", cache);
 }
 
 void Update(ascii::Game* game, int deltaMS)
