@@ -2,8 +2,8 @@
 
 const char* kWindowTitle = "The Whisperer in Darkness";
 
-const int kWindowWidth = 80;
-const int kWindowHeight = 25;
+const int kWindowWidth = 100;
+const int kWindowHeight = 40;
 
 ascii::Surface* gSurface;
 
