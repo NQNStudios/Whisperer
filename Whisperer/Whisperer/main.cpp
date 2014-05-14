@@ -30,17 +30,6 @@ void LoadContent(ascii::ImageCache* cache, ascii::SoundManager* soundManager)
 void Update(ascii::Game* game, int deltaMS)
 {
 	std::cout << "FPS: " << 1.0f / ((float)deltaMS / 1000.0f);
-
-	if (!gDrawn)
-	{
-		gDrawn = true;
-
-		game->graphics()->clearTransparent();
-		game->graphics()->blitSurface(gSurface, gSurfaceX, gSurfaceY);
-		game->graphics()->addBackgroundImage("forest", "forest", 0, 0);
-	
-		game->graphics()->update();
-	}
 }
 
 void HandleInput(ascii::Game* game, ascii::Input& input)
@@ -68,6 +57,16 @@ void HandleInput(ascii::Game* game, ascii::Input& input)
 
 void Draw(ascii::Game* game)
 {
+	if (!gDrawn)
+	{
+		gDrawn = true;
+
+		game->graphics()->clearTransparent();
+		game->graphics()->blitSurface(gSurface, gSurfaceX, gSurfaceY);
+		//game->graphics()->addBackgroundImage("forest", "forest", 0, 0);
+	
+		game->graphics()->update();
+	}
 	
 }
 
