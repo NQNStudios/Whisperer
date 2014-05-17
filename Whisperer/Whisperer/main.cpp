@@ -11,6 +11,8 @@
 #include <SDL_mixer.h>
 #include <SDL_image.h>
 
+#include "Surface.h"
+
 #include "Style.h"
 
 const char* kWindowTitle = "The Whisperer in Darkness";
@@ -83,6 +85,42 @@ void loadText(const char* path)
 	}
 
 	file.close();
+}
+
+void tweenSurface(ascii::Surface* surface, int x1, int y1, int x2, int y2, int ms, std::string stepScript)
+{
+	tweening = true;
+
+	tweeningSurface = surface;
+	tweenSrcX = x1;
+	tweenSrcY = y1;
+	tweenDestX = x2;
+	tweenDestY = y2;
+	tweenMS = ms;
+	tweenStepScript = stepScript;
+	tweenElapsedMS = 0;
+	tweenX = tweenSrcX;
+	tweenY = tweenSrcY;
+
+	tweenStepX = 0;
+	tweenStepY = 0;
+
+	if (tweenSrcX < tweenDestX)
+	{
+		tweenStepX = 1;
+	}
+	else if (tweenSrcX > tweenDestX)
+	{
+		tweenStepX = -1;
+	}
+	else if (tweenSrcY < tweenDestY)
+	{
+		tweenStepY = 1;
+	}
+	else if (tweenSrcY > tweenDestY)
+	{
+		tweenStepY = -1;
+	}
 }
 
 void RunLine(const char* line)
@@ -302,38 +340,7 @@ void RunLine(const char* line)
 		sstream >> ms;
 		sstream >> stepScript;
 
-		tweening = true;
-
-		tweeningSurface = surfaces[key];
-		tweenSrcX = atoi(x1.c_str());
-		tweenSrcY = atoi(y1.c_str());
-		tweenDestX = atoi(x2.c_str());
-		tweenDestY = atoi(y2.c_str());
-		tweenMS = atoi(ms.c_str());
-		tweenStepScript = stepScript;
-		tweenElapsedMS = 0;
-		tweenX = tweenSrcX;
-		tweenY = tweenSrcY;
-
-		tweenStepX = 0;
-		tweenStepY = 0;
-
-		if (tweenSrcX < tweenDestX)
-		{
-			tweenStepX = 1;
-		}
-		else if (tweenSrcX > tweenDestX)
-		{
-			tweenStepX = -1;
-		}
-		else if (tweenSrcY < tweenDestY)
-		{
-			tweenStepY = 1;
-		}
-		else if (tweenSrcY > tweenDestY)
-		{
-			tweenStepY = -1;
-		}
+		tweenSurface(surfaces[key], atoi(x1.c_str()), atoi(y1.c_str()), atoi(x2.c_str()), atoi(y2.c_str()), atoi(ms.c_str()), stepScript);
 	}
 
 	if (!command.compare("LoadSound"))
@@ -612,7 +619,7 @@ void RunStepScript(const char* path)
 
 void LoadContent(ascii::ImageCache* cache, ascii::SoundManager* soundManager)
 {
-	RunScript("Data/testscript.wsp");
+	RunScript("Data/menustart.wsp");
 }
 
 void Update(ascii::Game* game, int deltaMS)
@@ -644,9 +651,13 @@ void Update(ascii::Game* game, int deltaMS)
 			//step
 			game->graphics()->clear();
 
-			RunStepScript(tweenStepScript.c_str());
+			if (tweenStepScript.length() > 0)
+			{
+				RunStepScript(tweenStepScript.c_str());
+			}
 
 			game->graphics()->blitSurface(tweeningSurface, tweenX, tweenY);
+			game->graphics()->update();
 
 			if (tweenX == tweenDestX && tweenY == tweenDestY)
 			{
