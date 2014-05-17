@@ -1,0 +1,9 @@
+LoadSurface journal Data/journal.srf
+LoadSurface journalopen Data/journalopen.srf
+LoadImage woods Data/UntitledArtwork.png
+
+Clear
+ClearTransparent
+AddBackgroundImage woods1 woods 0 0
+CopySurface journal 30 4
+Update
