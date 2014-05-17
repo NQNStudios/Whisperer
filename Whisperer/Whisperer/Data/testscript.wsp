@@ -1,9 +1,16 @@
-LoadSurface journal Data/journal.srf
-LoadSurface journalopen Data/journalopen.srf
 LoadImage woods Data/UntitledArtwork.png
+LoadStyle journal Data/style.wsp
+LoadText Data/text.wsp
+
+FadeInTrack space 1000
 
 Clear
 ClearTransparent
 AddBackgroundImage woods1 woods 0 0
-CopySurface journal 30 4
 Update
+
+Wait 250
+
+MakeDialog intro1 journal 0 0 25 7 100 Data/animation.wsp
+
+ClearText
