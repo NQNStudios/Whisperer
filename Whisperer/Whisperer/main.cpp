@@ -71,6 +71,29 @@ const int kFirstEntryY = 6;
 
 bool inStepScript = false;
 
+int toMS(std::string speed)
+{
+	if (!speed.compare("Slow"))
+	{
+		return 333;
+	}
+	if (!speed.compare("Normal"))
+	{
+		return 40;
+	}
+	if (!speed.compare("Fast"))
+	{
+		return 20;
+	}
+
+	if (!speed.compare("Instant"))
+	{
+		return -1;
+	}
+
+	return 0;
+}
+
 void writeOpenChapters()
 {
 	std::ofstream ofile("Data/save.wsp");
@@ -140,7 +163,7 @@ void loadText(const char* path)
 	file.close();
 }
 
-void tweenSurface(ascii::Surface* surface, int x1, int y1, int x2, int y2, int ms, std::string stepScript)
+void tweenSurface(ascii::Surface* surface, int x1, int y1, int x2, int y2, int ms , std::string stepScript)
 {
 	tweening = true;
 
@@ -594,7 +617,7 @@ void RunLine(const char* line)
 		std::string y;
 		std::string width;
 		std::string height;
-		std::string ms;
+		std::string speed;
 		std::string stepScriptPath;
 
 		sstream >> textKey;
@@ -603,7 +626,7 @@ void RunLine(const char* line)
 		sstream >> y;
 		sstream >> width;
 		sstream >> height;
-		sstream >> ms;
+		sstream >> speed;
 		sstream >> stepScriptPath;
 
 		if (styles[style]->bubble)
@@ -620,7 +643,7 @@ void RunLine(const char* line)
 		revealedChars = 0;
 		charsToReveal = 0;
 		textElapsedMS = 0;
-		textMS = atoi(ms.c_str());
+		textMS = toMS(speed);
 		textRect = ascii::Rectangle(atoi(x.c_str()), atoi(y.c_str()), atoi(width.c_str()), atoi(height.c_str()));
 		textStepScript = stepScriptPath;
 		textStyle = styles[style];
@@ -897,6 +920,22 @@ void logMousePos(ascii::Input& input)
 	}
 }
 
+void handleSkip(ascii::Input& input)
+{
+	if (input.mouseButtonClicked(ascii::LEFT) || input.anyKeyPressed())
+	{
+		if (scrollingText)
+		{
+			textMS = -1;
+		}
+
+		if (msToWait > 0)
+		{
+			msToWait = 1;
+		}
+	}
+}
+
 void HandleInput(ascii::Game* game, ascii::Input& input)
 {
 	logMousePos(input);
@@ -909,6 +948,8 @@ void HandleInput(ascii::Game* game, ascii::Input& input)
 			Ready();
 		}
 	}
+
+	handleSkip(input);
 
 	if (mainMenu)
 	{
