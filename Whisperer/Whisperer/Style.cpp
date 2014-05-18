@@ -30,33 +30,43 @@ Style* loadStyle(const char* path)
 
 	Style* style = new Style();
 
-	ascii::Surface* bubbleSurface = ascii::Surface::FromFile(bubblePath.c_str());
+	if (bubblePath.length() > 0)
+	{
+		style->bubble = true;
 
-	int cornerWidth = (bubbleSurface->width() - 1) / 2;
-	int cornerHeight = (bubbleSurface->height() - 1) / 2;
+		ascii::Surface* bubbleSurface = ascii::Surface::FromFile(bubblePath.c_str());
 
-	style->topLeft = new ascii::Surface(cornerWidth, cornerHeight);
-	style->topLeft->copySurface(bubbleSurface, ascii::Rectangle(0, 0, cornerWidth, cornerHeight), 0, 0);
-	style->top = new ascii::Surface(1, cornerHeight);
-	style->top->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth, 0, 1, cornerHeight), 0, 0);
-	style->topRight = new ascii::Surface(cornerWidth, cornerHeight);
-	style->topRight->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth + 1, 0, cornerWidth, cornerHeight), 0, 0);
+		int cornerWidth = (bubbleSurface->width() - 1) / 2;
+		int cornerHeight = (bubbleSurface->height() - 1) / 2;
 
-	style->left = new ascii::Surface(cornerWidth, 1);
-	style->left->copySurface(bubbleSurface, ascii::Rectangle(0, cornerHeight, cornerWidth, 1), 0, 0);
-	style->center = new ascii::Surface(1, 1);
-	style->center->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth, cornerHeight, 1, 1), 0, 0);
-	style->right = new ascii::Surface(cornerWidth, 1);
-	style->right->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth + 1, cornerHeight, cornerWidth, 1), 0, 0);
+		style->topLeft = new ascii::Surface(cornerWidth, cornerHeight);
+		style->topLeft->copySurface(bubbleSurface, ascii::Rectangle(0, 0, cornerWidth, cornerHeight), 0, 0);
+		style->top = new ascii::Surface(1, cornerHeight);
+		style->top->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth, 0, 1, cornerHeight), 0, 0);
+		style->topRight = new ascii::Surface(cornerWidth, cornerHeight);
+		style->topRight->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth + 1, 0, cornerWidth, cornerHeight), 0, 0);
 
-	style->bottomLeft = new ascii::Surface(cornerWidth, cornerHeight);
-	style->bottomLeft->copySurface(bubbleSurface, ascii::Rectangle(0, cornerHeight + 1, cornerWidth, cornerHeight), 0, 0);
-	style->bottom = new ascii::Surface(1, cornerHeight);
-	style->bottom->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth, cornerHeight + 1, 1, cornerHeight), 0, 0);
-	style->bottomRight = new ascii::Surface(cornerWidth, cornerHeight);
-	style->bottomRight->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth + 1, cornerHeight + 1, cornerWidth, cornerHeight), 0, 0);
+		style->left = new ascii::Surface(cornerWidth, 1);
+		style->left->copySurface(bubbleSurface, ascii::Rectangle(0, cornerHeight, cornerWidth, 1), 0, 0);
+		style->center = new ascii::Surface(1, 1);
+		style->center->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth, cornerHeight, 1, 1), 0, 0);
+		style->right = new ascii::Surface(cornerWidth, 1);
+		style->right->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth + 1, cornerHeight, cornerWidth, 1), 0, 0);
 
-	delete bubbleSurface;
+		style->bottomLeft = new ascii::Surface(cornerWidth, cornerHeight);
+		style->bottomLeft->copySurface(bubbleSurface, ascii::Rectangle(0, cornerHeight + 1, cornerWidth, cornerHeight), 0, 0);
+		style->bottom = new ascii::Surface(1, cornerHeight);
+		style->bottom->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth, cornerHeight + 1, 1, cornerHeight), 0, 0);
+		style->bottomRight = new ascii::Surface(cornerWidth, cornerHeight);
+		style->bottomRight->copySurface(bubbleSurface, ascii::Rectangle(cornerWidth + 1, cornerHeight + 1, cornerWidth, cornerHeight), 0, 0);
+
+		delete bubbleSurface;
+
+	}
+	else
+	{
+		style->bubble = false;
+	}
 
 	std::stringstream cstream(colorInfo);
 

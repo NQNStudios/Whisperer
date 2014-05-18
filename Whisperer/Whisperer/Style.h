@@ -20,6 +20,8 @@ struct Style
 
 	int xPadding;
 	int yPadding;
+	
+	bool bubble;
 };
 
 Style* loadStyle(const char* path);

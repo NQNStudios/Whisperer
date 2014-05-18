@@ -563,7 +563,10 @@ void RunLine(const char* line)
 		sstream >> key;
 		sstream >> path;
 
-		styles[key] = loadStyle(path.c_str());
+		if (!styles[key])
+		{
+			styles[key] = loadStyle(path.c_str());
+		}
 
 		Ready();
 		return;
@@ -603,9 +606,12 @@ void RunLine(const char* line)
 		sstream >> ms;
 		sstream >> stepScriptPath;
 
-		ascii::Surface* bubble = makeBubble(styles[style], atoi(width.c_str()), atoi(height.c_str()));
+		if (styles[style]->bubble)
+		{
+			ascii::Surface* bubble = makeBubble(styles[style], atoi(width.c_str()), atoi(height.c_str()));
 
-		game->graphics()->blitSurface(bubble, atoi(x.c_str()), atoi(y.c_str()));
+			game->graphics()->blitSurface(bubble, atoi(x.c_str()), atoi(y.c_str()));
+		}
 
 		scrollingText = true;
 		textToScroll = text[textKey];
@@ -697,7 +703,16 @@ void RunStepScript(const char* path)
 
 void StartChapter(int chapter)
 {
+	RunScript("Data/startchapter.wsp");
 
+	std::stringstream sstream;
+
+	sstream << "RunScript Data/Chapter" << chapter << "/ch" << chapter << ".wsp";
+
+	char* cstr = new char [sstream.str().length()+1];
+	std::strcpy (cstr, sstream.str().c_str());
+
+	linesToExecute.push_back(cstr);
 }
 
 void LoadContent(ascii::ImageCache* cache, ascii::SoundManager* soundManager)
@@ -810,8 +825,8 @@ void Update(ascii::Game* game, int deltaMS)
 				textRect.x + textStyle->xPadding, textRect.y + textStyle->yPadding, 
 				textRect.width - textStyle->xPadding * 2, textRect.height - textStyle->yPadding * 2);
 
-			int endX = game->graphics()->measureStringMultilineX(textScrolled.c_str(), trueRect);
-			int endY = game->graphics()->measureStringMultilineY(textScrolled.c_str(), trueRect);
+			int endX = game->graphics()->stringMultilineEndX(textScrolled.c_str(), trueRect);
+			int endY = trueRect.y + game->graphics()->measureStringMultilineY(textScrolled.c_str(), trueRect) - 1;
 			int cutoffX = endX - charsToReveal + revealedChars;
 			for (int x = endX; x >= cutoffX && cutoffX != endX; --x)
 			{
@@ -871,8 +886,21 @@ void Update(ascii::Game* game, int deltaMS)
 	}
 }
 
+void logMousePos(ascii::Input& input)
+{
+	if (input.mouseButtonClicked(ascii::LEFT))
+	{
+		int selectedX = input.mouseX() / game->graphics()->charWidth();
+		int selectedY = input.mouseY() / game->graphics()->charHeight();
+
+		std::cout << "Mouse Pos: " << selectedX << ", " << selectedY << std::endl;
+	}
+}
+
 void HandleInput(ascii::Game* game, ascii::Input& input)
 {
+	logMousePos(input);
+
 	if (waitingForInput)
 	{
 		if (input.anyKeyPressed() || input.mouseButtonClicked(ascii::LEFT))

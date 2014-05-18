@@ -1,0 +1,10 @@
+LoadSurface journal Data/journal.srf
+LoadSurface journal-open Data/journal-open.srf
+LoadStyle journal Data/journalstyle.wsp
+LoadStyle journalbubble Data/journalbubblestyle.wsp
+
+TweenSurface journal 18 40 18 0 40 Data/menustep.wsp
+
+Wait 750
+
+RunScript Data/openjournal.wsp

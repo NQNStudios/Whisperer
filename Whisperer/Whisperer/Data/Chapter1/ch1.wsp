@@ -1,0 +1,60 @@
+LoadText Data/Chapter1/text.wsp
+LoadImage ford Data/Chapter1/fordinterior-scaled.png
+LoadImage body Data/Chapter1/bodyphoto-scaled.png
+
+MakeDialog Heading journal 21 1 28 29 160 Data/journaldialogstep.wsp
+
+MakeDialog P1 journal 21 3 28 29 40 Data/journaldialogstep.wsp
+
+AwaitInput
+
+Clear
+ClearTransparent
+AddBackgroundImage ford ford 0 0
+Update
+
+MakeDialog P2.1 journalbubble 25 1 50 4 40 Data/journaldialogstep.wsp
+
+AwaitInput
+
+MakeDialog P2.2 journalbubble 25 1 50 4 40 Data/journaldialogstep.wsp
+
+AwaitInput
+
+ClearImages
+FreeImage ford
+
+RunScript Data/openjournal.wsp
+
+MakeDialog Heading journal 21 1 28 29 -1 Data/journaldialogstep.wsp
+
+MakeDialog P1 journal 21 3 28 29 -1 Data/journaldialogstep.wsp
+
+MakeDialog P2 journal 21 17 28 29 -1 Data/journaldialogstep.wsp
+
+MakeDialog P3 journal 51 1 28 29 40 Data/journaldialogstep.wsp
+
+MakeDialog P4 journal 51 11 28 29 40 Data/journaldialogstep.wsp
+
+AwaitInput
+RunScript Data/openjournal.wsp
+
+MakeDialog P5.1 journal 21 1 28 29 40 Data/journaldialogstep.wsp
+
+AwaitInput
+
+Clear
+ClearTransparent
+AddBackgroundImage body body 0 0
+Update
+
+Wait 750
+
+MakeDialog P5.2 journalbubble 3 1 60 5 40 Data/journaldialogstep.wsp
+
+AwaitInput
+
+ClearImages
+FreeImage body
+
+RunScript Data/openjournal.wsp
