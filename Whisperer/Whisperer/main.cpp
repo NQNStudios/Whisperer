@@ -31,6 +31,8 @@ std::map<std::string, std::string> text;
 bool updateGraphics = false;
 int msToWait = 0;
 
+bool waitingForInput = false;
+
 bool tweening = false;
 ascii::Surface* tweeningSurface;
 int tweenX;
@@ -57,7 +59,58 @@ ascii::Rectangle textRect;
 std::string textStepScript;
 Style* textStyle;
 
+int selectedEntry = 0;
+bool mainMenu = false;
+bool* chapterOpen;
+const int kMainMenuX = 40;
+const int kMainMenuY = 5;
+const int kMainMenuWidth = 20;
+const int kMainMenuHeight = 22;
+const int kFirstEntryX  = 3;
+const int kFirstEntryY = 6;
+
 bool inStepScript = false;
+
+void writeOpenChapters()
+{
+	std::ofstream ofile("Data/save.wsp");
+
+	for (int i = 0; i < 8; ++i)
+	{
+		ofile << chapterOpen[i] << std::endl;
+	}
+
+	ofile.close();
+}
+
+void loadOpenChapters()
+{
+	chapterOpen = new bool[8];
+	chapterOpen[0] = true;
+	chapterOpen[1] = false;
+	chapterOpen[2] = false;
+	chapterOpen[3] = false;
+	chapterOpen[4] = false;
+	chapterOpen[5] = false;
+	chapterOpen[6] = false;
+	chapterOpen[7] = false;
+
+	std::ifstream ifile("Data/save.wsp");
+
+	if (ifile)
+	{
+		for (int i = 0; i < 8; ++i)
+		{
+			ifile >> chapterOpen[i];
+		}
+
+		ifile.close();
+	}
+	else
+	{
+		writeOpenChapters();
+	}
+}
 
 inline void Ready()
 {
@@ -132,6 +185,28 @@ void RunLine(const char* line)
 	std::string command;
 	sstream >> command;
 
+	if (!command.compare("UnlockChapter"))
+	{
+		std::string chapter;
+
+		sstream >> chapter;
+
+		chapterOpen[atoi(chapter.c_str()) - 1] = true;
+
+		writeOpenChapters();
+	}
+
+	if (!command.compare("AwaitInput"))
+	{
+		waitingForInput = true;
+	}
+
+	if (!command.compare("RunMainMenu"))
+	{
+		mainMenu = true;
+		selectedEntry = 0;
+	}
+
 	if (!command.compare("Clear"))
 	{
 		game->graphics()->clear();
@@ -179,7 +254,10 @@ void RunLine(const char* line)
 		sstream >> key;
 		sstream >> path;
 
-		surfaces[key] = ascii::Surface::FromFile(path.c_str());
+		if (!surfaces[key])
+		{
+			surfaces[key] = ascii::Surface::FromFile(path.c_str());
+		}
 
 		Ready();
 		return;
@@ -617,8 +695,15 @@ void RunStepScript(const char* path)
 	inStepScript = false;
 }
 
+void StartChapter(int chapter)
+{
+
+}
+
 void LoadContent(ascii::ImageCache* cache, ascii::SoundManager* soundManager)
 {
+	loadOpenChapters();
+
 	RunScript("Data/menustart.wsp");
 }
 
@@ -737,6 +822,46 @@ void Update(ascii::Game* game, int deltaMS)
 		}
 	}
 
+	if (mainMenu)
+	{
+		int selectedY = kMainMenuY + kFirstEntryY + selectedEntry;
+		if (selectedEntry > 0)
+		{
+			++selectedY;
+		}
+		if (selectedEntry > 8)
+		{
+			++selectedY;
+		}
+
+		for (int y = kMainMenuY + kFirstEntryY; y < kMainMenuY + kMainMenuHeight; ++y)
+		{
+			for (int x = kMainMenuX; x < kMainMenuX + kMainMenuWidth; ++x)
+			{
+				ascii::Color color = (y == selectedY ? ascii::Color::Red : ascii::Color::Black);
+
+				int levelY = y - kMainMenuY - kFirstEntryY - 1;
+
+				if (!chapterOpen[levelY - 1])
+				{
+					color = ascii::Color::Gray;
+				}
+
+				game->graphics()->setCharacterColor(x, y, color);
+
+				if (levelY > 0 && levelY < 9)
+				{
+					//draw the >
+					char character = (y == selectedY ? '>' : ' ');
+
+					game->graphics()->setCharacter(kMainMenuX + kFirstEntryX, y, character);
+				}
+			}
+		}
+
+		game->graphics()->update();
+	}
+
 	if (readyToContinue && linesToExecute.size() > 0)
 	{
 		std::string line = linesToExecute.front();
@@ -748,6 +873,82 @@ void Update(ascii::Game* game, int deltaMS)
 
 void HandleInput(ascii::Game* game, ascii::Input& input)
 {
+	if (waitingForInput)
+	{
+		if (input.anyKeyPressed() || input.mouseButtonClicked(ascii::LEFT))
+		{
+			waitingForInput = false;
+			Ready();
+		}
+	}
+
+	if (mainMenu)
+	{
+		int selectedX = input.mouseX() / game->graphics()->charWidth();
+		int selectedY = input.mouseY() / game->graphics()->charHeight();
+
+		if (selectedX > kMainMenuX && selectedX < kMainMenuX + kMainMenuWidth)
+		{
+			int selected = selectedY - kMainMenuY - kFirstEntryY;
+
+			if (selected > 0)
+			{
+				--selected;
+			}
+
+			if (selected > 8)
+			{
+				--selected;
+			}
+
+			if (selected >= 0 && selected <= 9)
+			{
+				int levelEntry = selected - 1;
+				if (levelEntry >= 0 && levelEntry < 8)
+				{
+					if (chapterOpen[levelEntry])
+					{
+						selectedEntry = selected;
+					}
+					else
+					{
+						selectedEntry = -1;
+					}
+				}
+				else
+				{
+					selectedEntry = selected;
+				}
+			}
+			else
+			{
+				selectedEntry = -1;
+			}
+		}
+		else
+		{
+			selectedEntry = -1;
+		}
+
+		if (input.mouseButtonClicked(ascii::LEFT) && selectedEntry != -1)
+		{
+			if (selectedEntry == 0)
+			{
+				RunScript("Data/introduction.wsp");
+			}
+			else if (selectedEntry == 9)
+			{
+				RunScript("Data/credits.wsp");
+			}
+			else
+			{
+				StartChapter(selectedEntry);
+			}
+
+			Ready();
+			mainMenu = false;
+		}
+	}
 }
 
 void Draw(ascii::Graphics& graphics)

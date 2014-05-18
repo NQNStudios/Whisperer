@@ -1,0 +1,13 @@
+LoadSurface intro Data/introduction.srf
+
+TweenSurface menu 40 5 40 -22 40 Data/menustep.wsp
+
+TweenSurface intro 0 -25 0 5 40 Data/menustep.wsp
+
+AwaitInput
+
+TweenSurface intro 0 5 0 -25 40 Data/menustep.wsp
+
+FreeSurface intro
+
+RunScript Data/menustart.wsp
