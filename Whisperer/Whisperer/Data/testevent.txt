@@ -1,0 +1,6 @@
+LoadStyle journal Data/journalbubblestyle.wsp
+LoadText Data/Chapter1/text.wsp
+
+MakeDialog P1 journal 0 0 50 10 Normal Data/journaldialogstep.wsp
+
+AwaitInput

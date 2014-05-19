@@ -71,6 +71,36 @@ const int kFirstEntryY = 6;
 
 bool inStepScript = false;
 
+bool exploring = false;
+ascii::Surface* mapSurface;
+ascii::Surface* playerSurface;
+int playerX = 0;
+int playerY = 0;
+float playerFloatX = 0.0f;
+float playerFloatY = 0.0f;
+const float kPlayerSpeed = 2.0f;
+
+bool movingLeft = false;
+bool movingRight = false;
+bool movingUp = false;
+bool movingDown = false;
+
+enum Direction
+{
+	UP,
+	RIGHT,
+	LEFT,
+	DOWN
+};
+
+Direction facing = DOWN;
+bool dark = false;
+
+void LogFPS(int deltaMS)
+{
+	std::cout << "FPS: " << 1.0f / ((float)deltaMS / 1000.0f);
+}
+
 int toMS(std::string speed)
 {
 	if (!speed.compare("Slow"))
@@ -207,6 +237,61 @@ void RunLine(const char* line)
 
 	std::string command;
 	sstream >> command;
+
+	if (!command.compare("Explore"))
+	{
+		std::string mapPath;
+		std::string playerPath;
+		std::string darkStr;
+
+		sstream >> mapPath;
+		sstream >> playerPath;
+		sstream >> darkStr;
+
+		exploring = true;
+		mapSurface = ascii::Surface::FromFile(mapPath.c_str());
+		playerSurface = ascii::Surface::FromFile(playerPath.c_str());
+
+		for (int x = 0; x < mapSurface->width(); ++x)
+		{
+			for (int y = 0; y < mapSurface->height(); ++y)
+			{
+				if (!mapSurface->getSpecialInfo(x, y).compare("Start"))
+				{
+					playerX = x;
+					playerY = y;
+					playerFloatX = x;
+					playerFloatY = y;
+				}
+			}
+		}
+
+		dark = !darkStr.compare("Dark");
+	}
+
+	if (!command.compare("StopExploring"))
+	{
+		exploring = false;
+
+		delete mapSurface;
+		delete playerSurface;
+
+		Ready();
+		return;
+	}
+
+	if (!command.compare("PauseExploring"))
+	{
+		exploring = false;
+		Ready();
+		return;
+	}
+
+	if (!command.compare("ResumeExploring"))
+	{
+		exploring = true;
+		readyToContinue = false;
+	}
 
 	if (!command.compare("UnlockChapter"))
 	{
@@ -668,6 +753,10 @@ void RunLine(const char* line)
 		Ready();
 		return;
 	}
+
+
+
+	std::cout << "ERROR: Invalid script command used: " << command << std::endl;
 }
 
 void RunScript(const char* path)
@@ -682,6 +771,35 @@ void RunScript(const char* path)
 	{
 		lines.push_back(line);
 	}
+
+	for (auto it = lines.rbegin(); it != lines.rend(); ++it)
+	{
+		//iterate through backwards in order to add them to linesToExecute in order.
+		if (it->size() > 0)
+		{
+			linesToExecute.push_front(*it);
+		}
+	}
+
+	file.close();
+}
+
+void RunEventScript(const char* path)
+{
+	std::ifstream file(path);
+
+	std::vector<std::string> lines;
+
+	std::string line;
+
+	RunLine("PauseExploring");
+
+	while (std::getline(file, line))
+	{
+		lines.push_back(line);
+	}
+
+	lines.push_back("ResumeExploring");
 
 	for (auto it = lines.rbegin(); it != lines.rend(); ++it)
 	{
@@ -757,6 +875,86 @@ void Update(ascii::Game* game, int deltaMS)
 			msToWait = 0;
 			Ready();
 		}
+	}
+
+	if (exploring)
+	{
+		//LogFPS(deltaMS);
+
+		float elapsedSec = (float)deltaMS / 1000.0f;
+
+		float dx = 0;
+		float dy = 0;
+
+		if (movingLeft)
+			dx = -1;
+
+		if (movingRight)
+			dx = 1;
+
+		if (movingUp)
+			dy = -1;
+
+		if (movingDown)
+			dy = 1;
+		
+		float mag = sqrt(pow(dx, 2) + pow(dy, 2));
+
+		if (mag > 0)
+		{
+			dx /= mag;
+			dy /= mag;
+		}
+
+		playerFloatX += dx * kPlayerSpeed * elapsedSec;
+		playerFloatY += dy * kPlayerSpeed * elapsedSec;
+
+
+		int newX = (int)playerFloatX;
+		int newY = (int)playerFloatY;
+
+		int y = newY + playerSurface->height() - 1;
+		
+		std::string specInfo = mapSurface->getSpecialInfo(newX, y);
+
+		if (specInfo.length() > 0)
+		{
+			if (!specInfo.compare("Wall"))
+			{
+				playerFloatX = playerX;
+				playerFloatY = playerY;
+				return;
+			}
+			else if (!specInfo.compare("Stop"))
+			{
+				//end the exploration
+				RunLine("StopExploring");
+			}
+			else
+			{
+				
+				//it's a script! Run the script
+				RunEventScript(specInfo.c_str());
+
+				//and now remove it from the level
+				for (int x = 0; x < mapSurface->width(); ++x)
+				{
+					for (int y = 0; y < mapSurface->height(); ++y)
+					{
+						std::string spec = mapSurface->getSpecialInfo(x, y);
+
+						if (!spec.compare(specInfo))
+						{
+							mapSurface->setSpecialInfo(x, y, "");
+						}
+					}
+				}
+			}
+		}
+
+		playerX = newX;
+		playerY = newY;
+
 	}
 
 	if (tweening)
@@ -947,9 +1145,40 @@ void HandleInput(ascii::Game* game, ascii::Input& input)
 			waitingForInput = false;
 			Ready();
 		}
+
+		return;
 	}
 
 	handleSkip(input);
+
+	movingLeft = false;
+	movingRight = false;
+	movingUp = false;
+	movingDown = false;
+
+	if (exploring)
+	{
+		if (input.isKeyHeld(SDLK_LEFT))
+		{
+			movingLeft = true;
+			facing = LEFT;
+		} 
+		else if (input.isKeyHeld(SDLK_RIGHT))
+		{
+			movingRight = true;
+			facing = RIGHT;
+		}
+		else if (input.isKeyHeld(SDLK_UP))
+		{
+			movingUp = true;
+			facing = UP;
+		} 
+		else if (input.isKeyHeld(SDLK_DOWN))
+		{
+			movingDown = true;
+			facing = DOWN;
+		}
+	}
 
 	if (mainMenu)
 	{
@@ -1028,6 +1257,81 @@ void Draw(ascii::Graphics& graphics)
 		updateGraphics = false;
 		Ready();
 	}
+
+	if (exploring)
+	{
+		graphics.clear();
+		graphics.blitSurface(mapSurface, 0, 0);
+		graphics.blitSurface(playerSurface, playerX, playerY);
+
+		if (dark)
+		{
+			graphics.clearTransparent();
+			
+			const int kViewDistX = 16;
+			const int kViewDistY = 10;
+			const int kViewIncDistX = 2;
+			const int kViewIncDistY = 1 ;
+
+			switch (facing)
+			{
+			case LEFT:
+				for (int y = playerY; y < playerY + playerSurface->height(); ++y)
+				{
+					graphics.setCellOpacity(playerX, y, true);
+				}
+				for (int x = playerX; x > playerX - kViewDistX; --x)
+				{
+					int height = 1 + (playerX - x) / kViewIncDistX;
+					for (int y = playerY - height / 2; y <= playerY + height / 2; ++y)
+					{
+						graphics.setCellOpacity(x, y, true);
+					}
+				}
+				break;
+			case RIGHT:
+				for (int y = playerY; y < playerY + playerSurface->height(); ++y)
+				{
+					graphics.setCellOpacity(playerX, y, true);
+				}
+				for (int x = playerX; x < playerX + kViewDistX; ++x)
+				{
+					int height = 1 + (x - playerX) / kViewIncDistX;
+					for (int y = playerY - height / 2; y <= playerY + height / 2; ++y)
+					{
+						graphics.setCellOpacity(x, y, true);
+					}
+				}
+				break;
+			case UP:
+				for (int y = playerY; y < playerY + playerSurface->height(); ++y)
+				{
+					graphics.setCellOpacity(playerX, y, true);
+				}
+				for (int y = playerY; y > playerY - kViewDistY; --y)
+				{
+					int width = 1 + (playerY - y) / kViewIncDistY;
+					for (int x = playerX - width / 2; x <= playerX + width / 2; ++x)
+					{
+						graphics.setCellOpacity(x, y, true);
+					}
+				}
+				break;
+			case DOWN:
+				for (int y = playerY; y < playerY + kViewDistY; ++y)
+				{
+					int width = 1 + (y - playerY) / kViewIncDistY;
+					for (int x = playerX - width / 2; x <= playerX + width / 2; ++x)
+					{
+						graphics.setCellOpacity(x, y, true);
+					}
+				}
+				break;
+			}
+		}
+
+		graphics.update();
+	}
 }
 
 int main(int argc, char** argv)
@@ -1037,9 +1341,4 @@ int main(int argc, char** argv)
 	game->Run();
 	
 	return 0;
-}
-
-void LogFPS(int deltaMS)
-{
-	std::cout << "FPS: " << 1.0f / ((float)deltaMS / 1000.0f);
 }

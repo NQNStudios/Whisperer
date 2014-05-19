@@ -1,0 +1,4 @@
+Explore Data/level.srf Data/player.srf Dark
+
+RunScript Data/startchapter.wsp
+RunScript Data/Chapter1/ch1.wsp
