@@ -99,6 +99,7 @@ MakeDialog P11 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
 MakeDialog P12 journal 21 7 28 29 Normal Data/journaldialogstep.wsp
 
 ClearGlyphs
+ClearText
 
 AwaitInput
 

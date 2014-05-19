@@ -1,5 +1,17 @@
 UnlockChapter 2
 
+LoadText Data/Chapter2/text.wsp
+
 Clear
 RunScript Data/openjournal.wsp
 Update
+
+MakeDialog Heading journal 21 1 28 29 Slow Data/journaldialogstep.wsp
+MakeDialog P1 journal 21 3 28 29 Normal Data/journaldialogstep.wsp
+MakeDialog P2 journal 21 10 28 29 Normal Data/journaldialogstep.wsp
+
+AwaitInput
+
+Clear
+
+ClearText
