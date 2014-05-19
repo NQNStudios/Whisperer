@@ -1,4 +1,4 @@
-Explore Data/level.srf Data/player.srf Dark
+Explore Data/Chapter2/study.srf Data/player.srf NotDark
 
 RunScript Data/startchapter.wsp
 RunScript Data/Chapter1/ch1.wsp

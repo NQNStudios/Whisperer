@@ -88,3 +88,18 @@ MakeDialog P6 journal 21 12 28 29 Instant Data/journalinstantstep.wsp
 MakeDialog P7.1 journal 21 22 28 29 Normal Data/journaldialogstep.wsp
 MakeDialog P7.2 journal 51 1 28 29 Normal Data/journaldialogstep.wsp
 MakeDialog P8 journal 51 4 28 29 Normal Data/journaldialogstep.wsp
+MakeDialog P9 journal 51 13 28 29 Normal Data/journaldialogstep.wsp
+MakeDialog P10 journal 51 18 28 29 Normal Data/journaldialogstep.wsp
+
+AwaitInput
+
+Clear
+RunScript Data/openjournal.wsp
+MakeDialog P11 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
+MakeDialog P12 journal 21 7 28 29 Normal Data/journaldialogstep.wsp
+
+ClearGlyphs
+
+AwaitInput
+
+StartChapter 2

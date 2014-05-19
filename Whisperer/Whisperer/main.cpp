@@ -96,6 +96,8 @@ enum Direction
 Direction facing = DOWN;
 bool dark = false;
 
+void StartChapter(int chapter);
+
 void LogFPS(int deltaMS)
 {
 	std::cout << "FPS: " << 1.0f / ((float)deltaMS / 1000.0f);
@@ -174,6 +176,7 @@ inline void Ready()
 }
 
 void RunScript(const char* path);
+void RunStepScript(const char* path);
 
 void loadText(const char* path)
 {
@@ -237,6 +240,24 @@ void RunLine(const char* line)
 
 	std::string command;
 	sstream >> command;
+
+	if (!command.compare("StartChapter"))
+	{
+		std::string chapter;
+
+		sstream >> chapter;
+
+		std::stringstream cmdstream;
+
+		cmdstream << "RunScript Data/Chapter" << chapter << "/ch" << chapter << ".wsp";
+
+		char* cstr = new char [cmdstream.str().length()+1];
+		std::strcpy (cstr, cmdstream.str().c_str());
+
+		linesToExecute.push_back(cstr);
+		Ready();
+		return;
+	}
 
 	if (!command.compare("Explore"))
 	{
@@ -302,6 +323,9 @@ void RunLine(const char* line)
 		chapterOpen[atoi(chapter.c_str()) - 1] = true;
 
 		writeOpenChapters();
+
+		Ready();
+		return;
 	}
 
 	if (!command.compare("AwaitInput"))
@@ -732,6 +756,20 @@ void RunLine(const char* line)
 		textRect = ascii::Rectangle(atoi(x.c_str()), atoi(y.c_str()), atoi(width.c_str()), atoi(height.c_str()));
 		textStepScript = stepScriptPath;
 		textStyle = styles[style];
+
+		if (textMS < 0)
+		{
+			//instantly show all
+			textScrolled = textToScroll;
+
+			addText(game->graphics(), textScrolled.c_str(), textStyle, textRect);
+
+			RunStepScript(textStepScript.c_str());
+
+			scrollingText = false;
+			Ready(); //done scrolling
+			return;
+		}
 	}
 
 	if (!command.compare("LoadText"))
@@ -865,6 +903,8 @@ void LoadContent(ascii::ImageCache* cache, ascii::SoundManager* soundManager)
 
 void Update(ascii::Game* game, int deltaMS)
 {
+	LogFPS(deltaMS);
+
 	if (msToWait > 0)
 	{
 		//handle Wait calls
@@ -879,7 +919,6 @@ void Update(ascii::Game* game, int deltaMS)
 
 	if (exploring)
 	{
-		//LogFPS(deltaMS);
 
 		float elapsedSec = (float)deltaMS / 1000.0f;
 
@@ -966,6 +1005,24 @@ void Update(ascii::Game* game, int deltaMS)
 		{
 			tweenElapsedMS -= tweenMS;
 
+			if (tweenX == tweenDestX && tweenY == tweenDestY)
+			{
+				tweening = false;
+
+				game->graphics()->clear();
+
+				if (tweenStepScript.length() > 0)
+				{
+					RunStepScript(tweenStepScript.c_str());
+				}
+
+				game->graphics()->blitSurface(tweeningSurface, tweenX, tweenY);
+				game->graphics()->update();
+
+				Ready(); //the tween is over
+				return;
+			}
+
 			tweenX += tweenStepX;
 			tweenY += tweenStepY;
 
@@ -992,6 +1049,7 @@ void Update(ascii::Game* game, int deltaMS)
 	{
 		textElapsedMS += deltaMS;
 
+					
 		if (textMS < 0)
 		{
 			//instantly show all
@@ -1004,12 +1062,14 @@ void Update(ascii::Game* game, int deltaMS)
 
 			scrollingText = false;
 			Ready(); //done scrolling
+			return;
 		}
 
 		else if (textElapsedMS > textMS)
 		{
 			textElapsedMS -= textMS;
-			
+
+
 			//step
 			if (revealedChars == charsToReveal)
 			{
@@ -1130,6 +1190,12 @@ void handleSkip(ascii::Input& input)
 		if (msToWait > 0)
 		{
 			msToWait = 1;
+		}
+
+		if (tweening)
+		{
+			tweenX = tweenDestX;
+			tweenY = tweenDestY;
 		}
 	}
 }
