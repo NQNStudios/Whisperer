@@ -5,17 +5,20 @@
 
 Style::~Style()
 {
-	delete topLeft;
-	delete top;
-	delete topRight;
+	if (bubble)
+	{
+		delete topLeft;
+		delete top;
+		delete topRight;
 	
-	delete left;
-	delete center;
-	delete right;
+		delete left;
+		delete center;
+		delete right;
 
-	delete bottomLeft;
-	delete bottom;
-	delete bottomRight;
+		delete bottomLeft;
+		delete bottom;
+		delete bottomRight;
+	}
 }
 
 Style* loadStyle(const char* path)
