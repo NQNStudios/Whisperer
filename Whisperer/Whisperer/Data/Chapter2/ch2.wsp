@@ -2,6 +2,19 @@ UnlockChapter 2
 
 LoadText Data/Chapter2/text.wsp
 
+LoadSurface reformer Data/Chapter2/reformer.srf
+LoadSurface laptop Data/laptop.srf
+LoadSurface fromakeley Data/email-akeley-zmail.srf
+LoadSurface reply Data/email-reply-zmail.srf
+LoadSurface sending Data/email-sending.srf
+LoadSurface sent Data/email-sent.srf
+
+LoadStyle reformer Data/Chapter2/reformerstyle.wsp
+LoadStyle email Data/emailstyle.wsp
+
+LoadImage clawprint Data/Chapter2/clawprintredo-scaled.png
+LoadImage stonecircle Data/Chapter2/stonecircle-scaled.png
+
 Clear
 RunScript Data/openjournal.wsp
 Update
@@ -13,5 +26,108 @@ MakeDialog P2 journal 21 10 28 29 Normal Data/journaldialogstep.wsp
 AwaitInput
 
 Clear
+BlitSurface reformer 0 0
+MakeDialog RebuttalTitle reformer 0 14 25 25 Instant
+MakeDialog RebuttalP1 reformer 0 17 25 25 Instant
+MakeDialog RebuttalP2.1 reformer 0 33 25 25 Instant
+MakeDialog RebuttalP2.2 reformer 25 14 25 25 Instant
+MakeDialog RebuttalP3 reformer 25 22 25 25 Instant
+MakeDialog RebuttalP4.1 reformer 25 34 25 25 Instant
+MakeDialog RebuttalP4.2 reformer 50 14 25 25 Instant
+Update
+
+AwaitInput
+
+Clear
+RunScript Data/openjournal.wsp
+MakeDialog P1 journal 21 3 28 29 Instant
+MakeDialog P2 journal 21 10 28 29 Instant
+Update
+
+MakeDialog P3 journal 21 12 28 29 Normal Data/journaldialogstep.wsp
+AwaitInput
+
+Explore Data/Chapter2/study.srf Data/player.srf
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail1P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail1P2 email 24 16 51 14 Instant
+MakeDialog AkeleyEmail1P3.1 email 24 24 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail1P3.2 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail1P4 email 24 15 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+MakeDialog P4 journalbubble 23 33 53 5 Normal Data/journaldialogstep.wsp
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+MakeDialog WilmarthEmail1P1 email 24 14 51 14 Typed
+
+AwaitEnter
+
+BlitSurface sending 23 10
+Update
+Wait 750
+
+BlitSurface laptop 0 0
+BlitSurface sent 23 10
+Update
+
+AwaitInput
+
+RunScript Data/openjournal.wsp
+Update
+
+MakeDialog P5 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
+
+AwaitInput
+
+AddForegroundImage clawprint clawprint 0 0
+Update
+
+AwaitInput
+
+ClearImages
+FreeImage clawprint
+
+AddForegroundImage stonecircle stonecircle 0 0
+Update
+
+AwaitInput
+
+ClearImages
+FreeImage stonecircle
+Update
+
+MakeDialog P6 journal 21 11 28 29 Normal Data/journaldialogstep.wsp
+
+AwaitInput
 
 ClearText
+FreeSurface reformer
+FreeSurface laptop
+FreeSurface fromakeley
+FreeSurface reply
+FreeSurface sending
+FreeSurface sent
+
+FreeStyle reformer
+FreeStyle email
+
+StartChapter 3

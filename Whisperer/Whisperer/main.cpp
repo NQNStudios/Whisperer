@@ -32,6 +32,10 @@ bool updateGraphics = false;
 int msToWait = 0;
 
 bool waitingForInput = false;
+bool waitingForEnter = false;
+bool keyPressed = false;
+
+const int kLettersPerKey = 2;
 
 bool tweening = false;
 ascii::Surface* tweeningSurface;
@@ -123,7 +127,12 @@ int toMS(std::string speed)
 		return -1;
 	}
 
-	return 0;
+	if (!speed.compare("Typed"))
+	{
+		return 0;
+	}
+
+	return -1;
 }
 
 void writeOpenChapters()
@@ -280,9 +289,9 @@ void RunLine(const char* line)
 				if (!mapSurface->getSpecialInfo(x, y).compare("Start"))
 				{
 					playerX = x;
-					playerY = y;
+					playerY = 1 + y - playerSurface->height();
 					playerFloatX = x;
-					playerFloatY = y;
+					playerFloatY = playerY;
 				}
 			}
 		}
@@ -331,6 +340,10 @@ void RunLine(const char* line)
 	if (!command.compare("AwaitInput"))
 	{
 		waitingForInput = true;
+	}
+	if (!command.compare("AwaitEnter"))
+	{
+		waitingForEnter = true;
 	}
 
 	if (!command.compare("RunMainMenu"))
@@ -901,9 +914,78 @@ void LoadContent(ascii::ImageCache* cache, ascii::SoundManager* soundManager)
 	RunScript("Data/menustart.wsp");
 }
 
+void stepDialog()
+{
+	if (revealedChars == charsToReveal)
+	{
+
+		std::string nextWord;
+		scrollStream >> nextWord;
+
+		if (charsToReveal != 0)
+		{
+			textScrolled = textScrolled.append(" "); //then it follows a word and needs a space
+		}
+		textScrolled = textScrolled.append(nextWord);
+
+		revealedChars = 0;
+		charsToReveal = nextWord.length();
+
+		if (!textScrolled.compare(textToScroll) && revealedChars == charsToReveal)
+		{
+			scrollingText = false;
+			Ready(); //done scrolling
+		}
+
+
+	}
+	else
+	{
+		++revealedChars;
+
+		if (!textScrolled.compare(textToScroll) && revealedChars == charsToReveal)
+		{
+			scrollingText = false;
+			Ready(); //done scrolling
+		}
+
+		if (textMS == 0 && revealedChars == charsToReveal)
+		{
+			std::string nextWord;
+			scrollStream >> nextWord;
+
+			if (charsToReveal != 0)
+			{
+				textScrolled = textScrolled.append(" "); //then it follows a word and needs a space
+			}
+			textScrolled = textScrolled.append(nextWord);
+
+			revealedChars = 0;
+			charsToReveal = nextWord.length();
+		}
+	}
+
+	
+	RunStepScript(textStepScript.c_str());
+
+	addText(game->graphics(), textScrolled.c_str(), textStyle, textRect);
+
+	ascii::Rectangle trueRect = ascii::Rectangle(
+		textRect.x + textStyle->xPadding, textRect.y + textStyle->yPadding, 
+		textRect.width - textStyle->xPadding * 2, textRect.height - textStyle->yPadding * 2);
+
+	int endX = game->graphics()->stringMultilineEndX(textScrolled.c_str(), trueRect);
+	int endY = trueRect.y + game->graphics()->measureStringMultilineY(textScrolled.c_str(), trueRect) - 1;
+	int cutoffX = endX - charsToReveal + revealedChars;
+	for (int x = endX; x >= cutoffX && cutoffX != endX; --x)
+	{
+		game->graphics()->setCharacter(x, endY, ' ');
+	}
+}
+
 void Update(ascii::Game* game, int deltaMS)
 {
-	LogFPS(deltaMS);
+	//LogFPS(deltaMS);
 
 	if (msToWait > 0)
 	{
@@ -1065,54 +1147,28 @@ void Update(ascii::Game* game, int deltaMS)
 			return;
 		}
 
+		else if (textMS == 0)
+		{
+			if (keyPressed)
+			{
+				keyPressed = false;
+
+				for (int i = 0; i < kLettersPerKey && !(!textScrolled.compare(textToScroll) && (charsToReveal == revealedChars)); ++i)
+				{
+					stepDialog();
+				}
+			}
+
+			game->graphics()->update();
+		}
+
 		else if (textElapsedMS > textMS)
 		{
 			textElapsedMS -= textMS;
 
 
 			//step
-			if (revealedChars == charsToReveal)
-			{
-
-				std::string nextWord;
-				scrollStream >> nextWord;
-
-				if (charsToReveal != 0)
-				{
-					textScrolled = textScrolled.append(" "); //then it follows a word and needs a space
-				}
-				textScrolled = textScrolled.append(nextWord);
-
-				revealedChars = 0;
-				charsToReveal = nextWord.length();
-
-			}
-			else
-			{
-				++revealedChars;
-			}
-
-			RunStepScript(textStepScript.c_str());
-
-			if (!textScrolled.compare(textToScroll) && revealedChars == charsToReveal)
-			{
-				scrollingText = false;
-				Ready(); //done scrolling
-			}
-
-			addText(game->graphics(), textScrolled.c_str(), textStyle, textRect);
-
-			ascii::Rectangle trueRect = ascii::Rectangle(
-				textRect.x + textStyle->xPadding, textRect.y + textStyle->yPadding, 
-				textRect.width - textStyle->xPadding * 2, textRect.height - textStyle->yPadding * 2);
-
-			int endX = game->graphics()->stringMultilineEndX(textScrolled.c_str(), trueRect);
-			int endY = trueRect.y + game->graphics()->measureStringMultilineY(textScrolled.c_str(), trueRect) - 1;
-			int cutoffX = endX - charsToReveal + revealedChars;
-			for (int x = endX; x >= cutoffX && cutoffX != endX; --x)
-			{
-				game->graphics()->setCharacter(x, endY, ' ');
-			}
+			stepDialog();
 
 			game->graphics()->update();
 		}
@@ -1182,7 +1238,7 @@ void handleSkip(ascii::Input& input)
 {
 	if (input.mouseButtonClicked(ascii::LEFT) || input.anyKeyPressed())
 	{
-		if (scrollingText)
+		if (scrollingText && textMS != 0)
 		{
 			textMS = -1;
 		}
@@ -1196,6 +1252,17 @@ void handleSkip(ascii::Input& input)
 		{
 			tweenX = tweenDestX;
 			tweenY = tweenDestY;
+		}
+
+		if (exploring && !input.anyKeyPressed())
+		{
+			exploring = false;
+
+			delete mapSurface;
+			delete playerSurface;
+
+			Ready();
+			return;
 		}
 	}
 }
@@ -1214,6 +1281,19 @@ void HandleInput(ascii::Game* game, ascii::Input& input)
 
 		return;
 	}
+
+	if (waitingForEnter)
+	{
+		if (input.wasKeyPressed(SDLK_RETURN))
+		{
+			waitingForEnter = false;
+			Ready();
+		}
+
+		return;
+	}
+
+	keyPressed = input.anyKeyPressed();
 
 	handleSkip(input);
 
