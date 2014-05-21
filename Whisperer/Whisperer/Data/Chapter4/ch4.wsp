@@ -69,7 +69,7 @@ Update
 AwaitInput
 
 BlitSurface laptop 0 0
-BlitSurface fromakeley 23 10
+BlitSurface fromakely 23 10
 MakeDialog AkeleyEmail3 email 24 14 51 14 Instant
 Update
 
