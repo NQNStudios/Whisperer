@@ -4,9 +4,19 @@ LoadText Data/Chapter2/text.wsp
 
 LoadSurface reformer Data/Chapter2/reformer.srf
 LoadStyle reformer Data/Chapter2/reformerstyle.wsp
+LoadImage wilmarth Data/Chapter2/wilmarth.png
 
-LoadImage clawprint Data/Chapter2/clawprintredo-scaled.png
+LoadImage clawprint Data/Chapter2/clawprintredo-cropped.png
 LoadImage stonecircle Data/Chapter2/stonecircle-scaled.png
+LoadImage blackstone Data/Chapter2/blackstone-scaled.png
+LoadImage farmhouse Data/Chapter2/farmhouse-scaled.png
+
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug1.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug2.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug3.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug4.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug5.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug6.wav
 
 Clear
 RunScript Data/openjournal.wsp
@@ -29,11 +39,15 @@ MakeDialog RebuttalP2.2 reformer 25 14 25 25 Instant
 MakeDialog RebuttalP3 reformer 25 22 25 25 Instant
 MakeDialog RebuttalP4.1 reformer 25 34 25 25 Instant
 MakeDialog RebuttalP4.2 reformer 50 14 25 25 Instant
+AddForegroundImage wilmarth wilmarth 51 23
 Update
 
 AwaitInput
 
 Clear
+ClearImages
+FreeImage wilmarth
+
 RunScript Data/openjournal.wsp
 MakeDialog P1 journal 21 3 28 29 Instant
 MakeDialog P2 journal 21 10 28 29 Instant
@@ -45,7 +59,9 @@ StopLoopingGroup
 
 AwaitInput
 
-Explore Data/Chapter2/study.srf Data/player.srf
+Explore Data/Chapter2/study.srf Data/player.srf carpetStep
+
+FreeSoundGroup carpetStep
 
 BlitSurface laptop 0 0
 BlitSurface fromakeley 23 10
@@ -102,25 +118,73 @@ StopLoopingGroup
 
 AwaitInput
 
-AddForegroundImage clawprint clawprint 0 0
+ClearTransparent
+AddBackgroundImage stonecircle stonecircle 0 0
+Update
+
+Wait 750
+MakeDialog circlecaption1 emailbubble 2 34 96 4 Instant
 Update
 
 AwaitInput
 
-ClearImages
-FreeImage clawprint
-
-AddForegroundImage stonecircle stonecircle 0 0
+MakeDialog circlecaption2 emailbubble 2 34 96 4 Instant
 Update
 
 AwaitInput
 
 ClearImages
 FreeImage stonecircle
+
+BlitSurface laptop 0 0
+AddForegroundImage clawprint clawprint 25 10
+Update
+
+Wait 750
+
+MakeDialog clawprintcaption emailbubble 6 34 88 4 Instant
+Update
+
+AwaitInput
+
+Clear
+ClearImages
+FreeImage clawprint
+
+ClearTransparent
+AddBackgroundImage blackstone blackstone 0 0
+Update
+
+Wait 750
+
+MakeDialog blackstonecaption emailbubble 6 34 88 4 Instant
+Update
+
+AwaitInput
+
+Clear
+ClearImages
+FreeImage blackstone
+
+ClearTransparent
+AddBackgroundImage farmhouse farmhouse 0 0
+Update
+
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog selfiecaption journalbubble 6 34 88 4 Normal
+StopLoopingGroup
+
+AwaitInput
+
+RunScript data/openjournal.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
+MakeDialog selfiecaption journal 21 11 28 29 Instant
 Update
 
 LoopSoundGroup writing
-MakeDialog P6 journal 21 11 28 29 Normal Data/journaldialogstep.wsp
+MakeDialog P6 journal 21 16 28 29 Normal
 StopLoopingGroup
 
 AwaitInput

@@ -3,10 +3,14 @@ LoadImage ford Data/Chapter1/fordinterior-scaled.png
 LoadImage body Data/Chapter1/bodyphoto-scaled.png
 LoadSurface herald Data/Chapter1/herald.srf
 
+LoadGroupSound music Data/Music/music_prologue.ogg
+
+LoopSoundGroup music
+
 LoopSoundGroup writing
 MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -17,13 +21,13 @@ Update
 
 LoopSoundGroup writing
 MakeDialog P2.1 journalbubble 25 1 50 4 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
 LoopSoundGroup writing
 MakeDialog P2.2 journalbubble 25 1 50 4 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -39,7 +43,7 @@ Update
 LoopSoundGroup writing
 MakeDialog P3 journal 51 1 28 29 Normal
 MakeDialog P4 journal 51 11 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 RunScript Data/openjournal.wsp
@@ -49,7 +53,7 @@ Wait 1000
 
 LoopSoundGroup writing
 MakeDialog P5.1 journal 21 1 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -62,7 +66,7 @@ Wait 750
 
 LoopSoundGroup writing
 MakeDialog P5.2 journalbubble 3 1 60 5 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -74,7 +78,7 @@ MakeDialog P5 journal 21 1 28 29 Instant
 
 LoopSoundGroup writing
 MakeDialog P6 journal 21 12 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -104,7 +108,7 @@ MakeDialog P7.2 journal 51 1 28 29 Normal
 MakeDialog P8 journal 51 4 28 29 Normal
 MakeDialog P9 journal 51 13 28 29 Normal
 MakeDialog P10 journal 51 18 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -117,12 +121,15 @@ Wait 1000
 LoopSoundGroup writing
 MakeDialog P11 journal 21 1 28 29 Normal
 MakeDialog P12 journal 21 7 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 ClearGlyphs
 ClearText
 
 AwaitInput
+
+StopLoopingGroup music
+FreeSoundGroup music
 
 RunScript Data/openjournal.wsp
 Update

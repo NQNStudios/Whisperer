@@ -11,20 +11,25 @@ LoadSurface chant7 Data/Chapter3/chant7.srf
 LoadSurface chant8 Data/Chapter3/chant8.srf
 LoadSurface tracking Data/Chapter3/tracking.srf
 
+LoadGroupSound chanting1 Data/Sounds/music_tape1.ogg
+LoadGroupSound chanting2 Data/Sounds/music_tape2.ogg
+
 RunScript Data/openjournal.wsp
 Update
 
 LoopSoundGroup writing
 MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
-MakeDialog P2 journal 21 14 28 29 Normal
+MakeDialog P2 journal 21 13 28 29 Normal
 StopLoopingGroup
 
 AwaitInput
 
 Clear
 Update
-AwaitInput
+
+LoopSoundGroup chanting1
+Wait 8000
 
 BlitSurface chant1 0 17
 Update
@@ -46,6 +51,8 @@ BlitSurface chant5 0 17
 Update
 AwaitInput
 
+LoopSoundGroup chanting2
+
 BlitSurface chant6 0 17
 Update
 AwaitInput
@@ -57,6 +64,12 @@ AwaitInput
 BlitSurface chant8 0 17
 Update
 AwaitInput
+
+StopLoopingGroup chanting1
+
+Wait 750
+
+StopLoopingGroup chanting2
 
 RunScript Data/openjournal.wsp
 Update

@@ -78,6 +78,8 @@ bool inStepScript = false;
 bool exploring = false;
 ascii::Surface* mapSurface;
 ascii::Surface* playerSurface;
+std::string footstepGroup;
+
 int playerX = 0;
 int playerY = 0;
 float playerFloatX = 0.0f;
@@ -302,7 +304,16 @@ void RunLine(const char* line)
 
 	if (!command.compare("StopLoopingGroup"))
 	{
-		game->soundManager()->stopLoopingGroup();
+		std::string group;
+
+		if (sstream >> group)
+		{
+			game->soundManager()->stopLoopingGroup(group);
+		}
+		else
+		{
+			game->soundManager()->stopLoopingGroup();
+		}
 
 		Ready();
 		return;
@@ -334,6 +345,7 @@ void RunLine(const char* line)
 
 		sstream >> mapPath;
 		sstream >> playerPath;
+		sstream >> footstepGroup;
 		sstream >> darkStr;
 
 		exploring = true;
@@ -1131,9 +1143,12 @@ void Update(ascii::Game* game, int deltaMS)
 			}
 		}
 
-		playerX = newX;
-		playerY = newY;
-
+		if (newX != playerX || newY != playerY)
+		{
+			game->soundManager()->playSoundGroup(footstepGroup);
+			playerX = newX;
+			playerY = newY;
+		}
 	}
 
 	if (tweening)

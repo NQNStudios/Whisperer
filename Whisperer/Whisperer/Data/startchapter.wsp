@@ -3,6 +3,7 @@ LoadSurface journal-open Data/journal-open.srf
 LoadStyle journal Data/journalstyle.wsp
 LoadStyle journalbubble Data/journalbubblestyle.wsp
 LoadStyle herald Data/heraldstyle.wsp
+LoadStyle emailbubble Data/emailbubble.wsp
 
 LoadSound bookslide Data/Sounds/snd_bookslide.wav
 LoadSound bookopen Data/Sounds/snd_bookopen.wav
