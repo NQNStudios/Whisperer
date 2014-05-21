@@ -1,0 +1,221 @@
+UnlockChapter 4
+
+LoadText Data/Chapter4/text.wsp
+
+RunScript Data/openjournal.wsp
+Update
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+StopLoopingGroup
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail1P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail1P2.1 email 24 22 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail1P2.2 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail1P3 email 24 15 51 14 Instant
+MakeDialog AkeleyEmail1P4.1 email 24 21 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+Update
+
+Wait 250
+
+LoopSoundGroup writing
+MakeDialog P2 journalbubble 25 33 50 4 Normal
+StopLoopingGroup
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail2P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail2P2 email 24 22 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+LoopSoundGroup fasttyping
+MakeDialog WilmarthEmail1P1 email 24 14 51 14 Normal
+MakeDialog WilmarthEmail1P2 email 24 18 51 14 Normal
+StopLoopingGroup
+
+AwaitEnter
+
+BlitSurface sending 23 10
+Update
+Wait 750
+
+BlitSurface laptop 0 0
+BlitSurface sent 23 10
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail3 email 24 14 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+LoopSoundGroup fasttyping
+MakeDialog WilmarthEmail2 email 24 14 51 14 Fast
+StopLoopingGroup
+
+AwaitEnter
+
+BlitSurface sending 23 10
+Update
+Wait 750
+
+BlitSurface laptop 0 0
+BlitSurface sent 23 10
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail4P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail4P2 email 24 19 51 14 Instant
+MakeDialog AkeleyEmail4P3 email 24 23 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+LoopSoundGroup fasttyping
+MakeDialog WilmarthEmail3P1 email 24 14 51 14 Fast
+MakeDialog WilmarthEmail3P2 email 24 18 51 14 Fast
+StopLoopingGroup
+
+AwaitEnter
+
+BlitSurface sending 23 10
+Update
+Wait 750
+
+BlitSurface laptop 0 0
+BlitSurface sent 23 10
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+Update
+
+Wait 250
+
+LoopSoundGroup writing
+MakeDialog P3 journalbubble 25 33 50 5 Normal
+StopLoopingGroup
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail5P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail5P2 email 24 23 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail5P3 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail5P4 email 24 18 51 14 Instant
+MakeDialog AkeleyEmail5P5 email 24 24 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail5P6 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail5P7 email 24 15 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail6P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail6P2 email 24 19 51 14 Instant
+MakeDialog AkeleyEmail6P3.1 email 24 23 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail6P3.2 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail6P4 email 24 13 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+Update
+
+Wait 250
+
+LoopSoundGroup writing
+MakeDialog P4 journalbubble 25 33 50 5 Normal
+StopLoopingGroup
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail7P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail7P2 email 24 19 51 14 Instant
+MakeDialog AkeleyEmail7P3 email 24 23 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+
+MakeDialog AkeleyEmail7P4 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail7P5 email 24 19 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail7P6 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail7P7 email 24 17 51 14 Instant
+MakeDialog AkeleyEmail7P8 email 24 23 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail7P9 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail7P10 email 24 14 51 14 Instant
+Update
+AwaitInput
+
+ClearText
+StartChapter 5

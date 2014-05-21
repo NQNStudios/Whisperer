@@ -4,8 +4,42 @@ LoadStyle journal Data/journalstyle.wsp
 LoadStyle journalbubble Data/journalbubblestyle.wsp
 LoadStyle herald Data/heraldstyle.wsp
 
-TweenSurface journal 18 40 18 0 40 Data/menustep.wsp
+LoadSound bookslide Data/Sounds/snd_bookslide.wav
+LoadSound bookopen Data/Sounds/snd_bookopen.wav
+
+LoadSurface laptop Data/laptop.srf
+LoadSurface fromakeley Data/email-akeley-zmail.srf
+LoadSurface reply Data/email-reply-zmail.srf
+LoadSurface sending Data/email-sending.srf
+LoadSurface sent Data/email-sent.srf
+LoadStyle email Data/emailstyle.wsp
+
+LoadGroupSound slowtyping Data/Sounds/snd_typing1.wav
+LoadGroupSound slowtyping Data/Sounds/snd_typing2.wav
+LoadGroupSound slowtyping Data/Sounds/snd_typing3.wav
+LoadGroupSound slowtyping Data/Sounds/snd_typing4.wav
+LoadGroupSound slowtyping Data/Sounds/snd_typing5.wav
+
+LoadGroupSound fasttyping Data/Sounds/snd_typing6.wav
+LoadGroupSound fasttyping Data/Sounds/snd_typing7.wav
+LoadGroupSound fasttyping Data/Sounds/snd_typing8.wav
+LoadGroupSound fasttyping Data/Sounds/snd_typing9.wav
+LoadGroupSound fasttyping Data/Sounds/snd_typing10.wav
+
+LoadGroupSound pageturn Data/Sounds/snd_bookpage1.wav
+LoadGroupSound pageturn Data/Sounds/snd_bookpage2.wav
+LoadGroupSound pageturn Data/Sounds/snd_bookpage3.wav
+LoadGroupSound pageturn Data/Sounds/snd_bookpage4.wav
+
+LoadGroupSound writing Data/Sounds/snd_writing1.wav
+LoadGroupSound writing Data/Sounds/snd_writing2.wav
+LoadGroupSound writing Data/Sounds/snd_writing3.wav
+LoadGroupSound writing Data/Sounds/snd_writing4.wav
+
+PlaySound bookslide
+TweenSurface journal 18 40 18 0 20 Data/menustep.wsp
 
 Wait 750
 
+PlaySound bookopen
 RunScript Data/openjournal.wsp

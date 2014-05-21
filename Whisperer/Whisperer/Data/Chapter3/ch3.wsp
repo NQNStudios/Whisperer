@@ -10,14 +10,15 @@ LoadSurface chant6 Data/Chapter3/chant6.srf
 LoadSurface chant7 Data/Chapter3/chant7.srf
 LoadSurface chant8 Data/Chapter3/chant8.srf
 LoadSurface tracking Data/Chapter3/tracking.srf
-LoadSurface laptop Data/laptop.srf
 
 RunScript Data/openjournal.wsp
 Update
 
-MakeDialog Heading journal 21 1 28 29 Slow Data/journaldialogstep.wsp
-MakeDialog P1 journal 21 3 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P2 journal 21 14 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+MakeDialog P2 journal 21 14 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -60,12 +61,17 @@ AwaitInput
 RunScript Data/openjournal.wsp
 Update
 
-MakeDialog P3 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P4 journal 21 9 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P5 journal 21 16 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P6 journal 21 21 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P7 journal 51 1 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P8 journal 51 9 28 29 Normal Data/journaldialogstep.wsp
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P3 journal 21 1 28 29 Normal
+MakeDialog P4 journal 21 9 28 29 Normal
+MakeDialog P5 journal 21 16 28 29 Normal
+MakeDialog P6 journal 21 21 28 29 Normal
+MakeDialog P7 journal 51 1 28 29 Normal
+MakeDialog P8 journal 51 9 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -75,7 +81,10 @@ Update
 
 AwaitInput
 
-MakeDialog P9 journalbubble 23 33 53 3 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P9 journalbubble 23 33 53 3 Normal
+StopLoopingGroup
+
 AwaitInput
 
 RunScript Data/openjournal.wsp
@@ -87,9 +96,14 @@ MakeDialog P7 journal 51 1 28 29 Instant
 MakeDialog P8 journal 51 9 28 29 Instant
 MakeDialog P9 journal 51 15 28 29 Instant
 Update
-MakeDialog P10 journal 51 18 28 29 Normal Data/journaldialogstep.wsp
+
+LoopSoundGroup writing
+MakeDialog P10 journal 51 18 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
+
+ClearText
 
 FreeSurface chant1
 FreeSurface chant2
@@ -100,6 +114,11 @@ FreeSurface chant6
 FreeSurface chant7
 FreeSurface chant8
 FreeSurface tracking
-FreeSurface laptop
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
 
 StartChapter 4

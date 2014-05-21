@@ -3,9 +3,10 @@ LoadImage ford Data/Chapter1/fordinterior-scaled.png
 LoadImage body Data/Chapter1/bodyphoto-scaled.png
 LoadSurface herald Data/Chapter1/herald.srf
 
-MakeDialog Heading journal 21 1 28 29 Slow Data/journaldialogstep.wsp
-
-MakeDialog P1 journal 21 3 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -14,11 +15,15 @@ ClearTransparent
 AddBackgroundImage ford ford 0 0
 Update
 
-MakeDialog P2.1 journalbubble 25 1 50 4 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P2.1 journalbubble 25 1 50 4 Normal
+StopLoopingGroup
 
 AwaitInput
 
-MakeDialog P2.2 journalbubble 25 1 50 4 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P2.2 journalbubble 25 1 50 4 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -26,21 +31,25 @@ ClearImages
 FreeImage ford
 
 RunScript Data/openjournal.wsp
+MakeDialog Heading journal 21 1 28 29 Instant
+MakeDialog P1 journal 21 3 28 29 Instant
+MakeDialog P2 journal 21 17 28 29 Instant
+Update
 
-MakeDialog Heading journal 21 1 28 29 Instant Data/journalinstantstep.wsp
-
-MakeDialog P1 journal 21 3 28 29 Instant Data/journalinstantstep.wsp
-
-MakeDialog P2 journal 21 17 28 29 Instant Data/journalinstantstep.wsp
-
-MakeDialog P3 journal 51 1 28 29 Normal Data/journaldialogstep.wsp
-
-MakeDialog P4 journal 51 11 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P3 journal 51 1 28 29 Normal
+MakeDialog P4 journal 51 11 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 RunScript Data/openjournal.wsp
 
-MakeDialog P5.1 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P5.1 journal 21 1 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -51,7 +60,9 @@ Update
 
 Wait 750
 
-MakeDialog P5.2 journalbubble 3 1 60 5 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P5.2 journalbubble 3 1 60 5 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -59,22 +70,23 @@ ClearImages
 FreeImage body
 
 RunScript Data/openjournal.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
 
-MakeDialog P5 journal 21 1 28 29 Instant Data/journalinstantstep.wsp
-
-MakeDialog P6 journal 21 12 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P6 journal 21 12 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
 Clear
 BlitSurface herald 0 0
-MakeDialog herald-title herald 1 9 34 33 Instant Data/journalinstantstep.wsp
-MakeDialog herald-P1 herald 1 12 34 33 Instant Data/journalinstantstep.wsp
-MakeDialog herald-P2 herald 1 18 34 33 Instant Data/journalinstantstep.wsp
-MakeDialog herald-P3 herald 1 24 34 33 Instant Data/journalinstantstep.wsp
-MakeDialog herald-P4 herald 38 9 34 33 Instant Data/journalinstantstep.wsp
-MakeDialog herald-P5 herald 38 16 34 33 Instant Data/journalinstantstep.wsp
-MakeDialog herald-P6 herald 38 25 34 33 Instant Data/journalinstantstep.wsp
+MakeDialog herald-title herald 1 9 34 33 Instant
+MakeDialog herald-P1 herald 1 12 34 33 Instant
+MakeDialog herald-P2 herald 1 18 34 33 Instant
+MakeDialog herald-P3 herald 1 24 34 33 Instant
+MakeDialog herald-P4 herald 38 9 34 33 Instant
+MakeDialog herald-P5 herald 38 16 34 33 Instant
+MakeDialog herald-P6 herald 38 25 34 33 Instant
 Update
 
 AwaitInput
@@ -83,24 +95,39 @@ FreeSurface herald
 
 Clear
 RunScript Data/openjournal.wsp
-MakeDialog P5 journal 21 1 28 29 Instant Data/journalinstantstep.wsp
-MakeDialog P6 journal 21 12 28 29 Instant Data/journalinstantstep.wsp
-MakeDialog P7.1 journal 21 22 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P7.2 journal 51 1 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P8 journal 51 4 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P9 journal 51 13 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P10 journal 51 18 28 29 Normal Data/journaldialogstep.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
+MakeDialog P6 journal 21 12 28 29 Instant
+
+LoopSoundGroup writing
+MakeDialog P7.1 journal 21 22 28 29 Normal
+MakeDialog P7.2 journal 51 1 28 29 Normal
+MakeDialog P8 journal 51 4 28 29 Normal
+MakeDialog P9 journal 51 13 28 29 Normal
+MakeDialog P10 journal 51 18 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
 Clear
 RunScript Data/openjournal.wsp
-MakeDialog P11 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P12 journal 21 7 28 29 Normal Data/journaldialogstep.wsp
+
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P11 journal 21 1 28 29 Normal
+MakeDialog P12 journal 21 7 28 29 Normal
+StopLoopingGroup
 
 ClearGlyphs
 ClearText
 
 AwaitInput
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
 
 StartChapter 2

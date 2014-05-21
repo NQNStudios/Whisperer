@@ -250,6 +250,64 @@ void RunLine(const char* line)
 	std::string command;
 	sstream >> command;
 
+	if (!command.compare("LoadGroupSound"))
+	{
+		std::string group;
+		std::string path;
+
+		sstream >> group;
+		sstream >> path;
+
+		game->soundManager()->loadGroupSound(group, path.c_str());
+
+		Ready();
+		return;
+	}
+	
+	if (!command.compare("FreeSoundGroup"))
+	{
+		std::string group;
+
+		sstream >> group;
+
+		game->soundManager()->freeSoundGroup(group);
+
+		Ready();
+		return;
+	}
+
+	if (!command.compare("PlaySoundGroup"))
+	{
+		std::string group;
+
+		sstream >> group;
+
+		game->soundManager()->playSoundGroup(group);
+
+		Ready();
+		return;
+	}
+
+	if (!command.compare("LoopSoundGroup"))
+	{
+		std::string group;
+
+		sstream >> group;
+
+		game->soundManager()->loopSoundGroup(group);
+
+		Ready();
+		return;
+	}
+
+	if (!command.compare("StopLoopingGroup"))
+	{
+		game->soundManager()->stopLoopingGroup();
+
+		Ready();
+		return;
+	}
+
 	if (!command.compare("StartChapter"))
 	{
 		std::string chapter;

@@ -3,14 +3,7 @@ UnlockChapter 2
 LoadText Data/Chapter2/text.wsp
 
 LoadSurface reformer Data/Chapter2/reformer.srf
-LoadSurface laptop Data/laptop.srf
-LoadSurface fromakeley Data/email-akeley-zmail.srf
-LoadSurface reply Data/email-reply-zmail.srf
-LoadSurface sending Data/email-sending.srf
-LoadSurface sent Data/email-sent.srf
-
 LoadStyle reformer Data/Chapter2/reformerstyle.wsp
-LoadStyle email Data/emailstyle.wsp
 
 LoadImage clawprint Data/Chapter2/clawprintredo-scaled.png
 LoadImage stonecircle Data/Chapter2/stonecircle-scaled.png
@@ -19,9 +12,11 @@ Clear
 RunScript Data/openjournal.wsp
 Update
 
-MakeDialog Heading journal 21 1 28 29 Slow Data/journaldialogstep.wsp
-MakeDialog P1 journal 21 3 28 29 Normal Data/journaldialogstep.wsp
-MakeDialog P2 journal 21 10 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+MakeDialog P2 journal 21 10 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -44,7 +39,10 @@ MakeDialog P1 journal 21 3 28 29 Instant
 MakeDialog P2 journal 21 10 28 29 Instant
 Update
 
-MakeDialog P3 journal 21 12 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P3 journal 21 12 28 29 Normal
+StopLoopingGroup
+
 AwaitInput
 
 Explore Data/Chapter2/study.srf Data/player.srf
@@ -69,7 +67,9 @@ BlitSurface laptop 0 0
 BlitSurface reply 23 10
 Update
 
-MakeDialog P4 journalbubble 23 33 53 5 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P4 journalbubble 23 33 53 5 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -77,7 +77,9 @@ BlitSurface laptop 0 0
 BlitSurface reply 23 10
 Update
 
-MakeDialog WilmarthEmail1P1 email 24 14 51 14 Typed
+LoopSoundGroup slowtyping
+MakeDialog WilmarthEmail1P1 email 24 14 51 14 Normal
+StopLoopingGroup
 
 AwaitEnter
 
@@ -94,7 +96,9 @@ AwaitInput
 RunScript Data/openjournal.wsp
 Update
 
-MakeDialog P5 journal 21 1 28 29 Normal Data/journaldialogstep.wsp
+LoopSoundGroup writing
+MakeDialog P5 journal 21 1 28 29 Normal
+StopLoopingGroup
 
 AwaitInput
 
@@ -115,19 +119,21 @@ ClearImages
 FreeImage stonecircle
 Update
 
+LoopSoundGroup writing
 MakeDialog P6 journal 21 11 28 29 Normal Data/journaldialogstep.wsp
+StopLoopingGroup
 
 AwaitInput
 
 ClearText
 FreeSurface reformer
-FreeSurface laptop
-FreeSurface fromakeley
-FreeSurface reply
-FreeSurface sending
-FreeSurface sent
 
 FreeStyle reformer
-FreeStyle email
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
 
 StartChapter 3
