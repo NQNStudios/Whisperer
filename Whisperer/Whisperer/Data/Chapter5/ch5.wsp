@@ -35,21 +35,21 @@ AwaitInput
 
 BlitSurface laptop 0 0
 MakeDialog EmailP6 email 24 11 51 14 Instant
-MakeDialog EmailP7 email 24 17 51 14 Instant
-MakeDialog EmailP8.1 email 24 25 51 14 Instant
+MakeDialog EmailP7 email 24 19 51 14 Instant
 Update
 AwaitInput
 
 BlitSurface laptop 0 0
-MakeDialog EmailP8.2 email 24 11 51 14 Instant
-MakeDialog EmailP9 email 24 16 51 14 Instant
-MakeDialog EmailP10 email 24 23 51 14 Instant
+MakeDialog EmailP8 email 24 11 51 14 Instant
+MakeDialog EmailP9 email 24 19 51 14 Instant
+MakeDialog EmailP10.1 email 24 26 51 14 Instant
 Update
 AwaitInput
 
 BlitSurface laptop 0 0
-MakeDialog EmailP11 email 24 11 51 14 Instant
-MakeDialog EmailP12 email 24 17 51 14 Instant
+MakeDialog EmailP10.2 email 24 11 51 14 Instant
+MakeDialog EmailP11 email 24 15 51 14 Instant
+MakeDialog EmailP12 email 24 21 51 14 Instant
 MakeDialog EmailP13 email 24 20 51 14 Instant
 Update
 AwaitInput
