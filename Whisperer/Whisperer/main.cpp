@@ -1145,7 +1145,10 @@ void Update(ascii::Game* game, int deltaMS)
 
 		if (newX != playerX || newY != playerY)
 		{
-			game->soundManager()->playSoundGroup(footstepGroup);
+			if (footstepGroup.compare(""))
+			{
+				game->soundManager()->playSoundGroup(footstepGroup);
+			}
 			playerX = newX;
 			playerY = newY;
 		}

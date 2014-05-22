@@ -6,6 +6,20 @@ MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
 MakeDialog P2 journal 21 9 28 29 Normal
 MakeDialog P3 journal 21 16 28 29 Normal
+StopLoopingGroup writing
+AwaitInput
+
+Explore Data/Chapter6/station.srf Data/player.srf
+
+RunScript Data/openjournal.wsp
+MakeDialog Heading journal 21 1 28 29 Instant
+MakeDialog P1 journal 21 3 28 29 Instant
+MakeDialog P2 journal 21 9 28 29 Instant
+MakeDialog P3 journal 21 16 28 29 Instant
+Update
+Wait 500
+
+LoopSoundGroup writing
 MakeDialog P4.1 journal 21 23 28 29 Normal
 MakeDialog P4.2 journal 51 1 28 29 Normal
 MakeDialog P5 journal 51 4 28 29 Normal
