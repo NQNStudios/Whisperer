@@ -1,0 +1,52 @@
+UnlockChapter 6
+LoadText Data/Chapter6/text.wsp
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+MakeDialog P2 journal 21 9 28 29 Normal
+MakeDialog P3 journal 21 16 28 29 Normal
+MakeDialog P4.1 journal 21 23 28 29 Normal
+MakeDialog P4.2 journal 51 1 28 29 Normal
+MakeDialog P5 journal 51 4 28 29 Normal
+MakeDialog P6 journal 51 13 28 29 Normal
+MakeDialog P7 journal 51 18 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+RunScript Data/openjournal.wsp
+Update
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P8 journal 21 1 28 29 Normal
+MakeDialog P9 journal 21 10 28 29 Normal
+MakeDialog P10 journal 21 17 28 29 Normal
+MakeDialog P11 journal 21 23 28 29 Normal
+MakeDialog P12 journal 51 1 28 29 Normal
+MakeDialog P13 journal 51 8 28 29 Normal
+MakeDialog P14 journal 51 14 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+RunScript Data/openjournal.wsp
+Update
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P15 journal 21 1 28 29 Normal
+MakeDialog P16 journal 21 11 28 29 Normal
+MakeDialog P17 journal 21 15 28 29 Normal
+MakeDialog P18 journal 21 20 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearText
+RunScript Data/openjournal.wsp
+Update
+PlaySoundGroup pageturn
+Wait 1000
+StartChapter 7

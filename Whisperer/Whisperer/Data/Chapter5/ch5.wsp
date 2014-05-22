@@ -9,7 +9,7 @@ LoadGroupSound carpetStep Data/Sounds/snd_walkingrug5.wav
 LoadGroupSound carpetStep Data/Sounds/snd_walkingrug6.wav
 
 LoopSoundGroup writing
-MakeDialog Heading journal 21 1 28 29 Normal
+MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
 StopLoopingGroup writing
 
