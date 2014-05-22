@@ -1,6 +1,19 @@
 UnlockChapter 6
 LoadText Data/Chapter6/text.wsp
 
+LoadImage farmroad Data/Chapter6/farmroad-scaled.png
+LoadStyle voice Data/voicestyle.wsp
+
+LoadGroupSound concreteStep Data/Chapter6/snd_walkingconcrete1.wav
+LoadGroupSound concreteStep Data/Chapter6/snd_walkingconcrete2.wav
+LoadGroupSound concreteStep Data/Chapter6/snd_walkingconcrete3.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt1.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt1.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt1.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt1.wav
+
+LoadSound carleaving Data/Chapter6/snd_carleaving.wav
+
 LoopSoundGroup writing
 MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
@@ -9,7 +22,9 @@ MakeDialog P3 journal 21 16 28 29 Normal
 StopLoopingGroup writing
 AwaitInput
 
-Explore Data/Chapter6/station.srf Data/player.srf
+Explore Data/Chapter6/station.srf Data/player.srf concreteStep !Dark Fast
+
+FreeSoundGroup concreteStep
 
 RunScript Data/openjournal.wsp
 MakeDialog Heading journal 21 1 28 29 Instant
@@ -37,6 +52,34 @@ LoopSoundGroup writing
 MakeDialog P8 journal 21 1 28 29 Normal
 MakeDialog P9 journal 21 10 28 29 Normal
 MakeDialog P10 journal 21 17 28 29 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearTransparent
+AddBackgroundImage farmroad farmroad 0 0
+Update
+Wait 750
+MakeDialog BrownDialog1 voice 17 33 40 6 Instant
+Update
+AwaitInput
+
+Clear
+MakeDialog BrownDialog2 voice 17 33 40 6 Instant
+Update
+AwaitInput
+
+Clear
+MakeDialog BrownDialog3 voice 17 33 40 6 Instant
+Update
+AwaitInput
+
+RunScript Data/openjournal.wsp
+MakeDialog P8 journal 21 1 28 29 Instant
+MakeDialog P9 journal 21 10 28 29 Instant
+MakeDialog P10 journal 21 17 28 29 Instant
+Update
+
+LoopSoundGroup writing
 MakeDialog P11 journal 21 23 28 29 Normal
 MakeDialog P12 journal 51 1 28 29 Normal
 MakeDialog P13 journal 51 8 28 29 Normal
@@ -52,11 +95,15 @@ Wait 1000
 LoopSoundGroup writing
 MakeDialog P15 journal 21 1 28 29 Normal
 MakeDialog P16 journal 21 11 28 29 Normal
-MakeDialog P17 journal 21 15 28 29 Normal
-MakeDialog P18 journal 21 20 28 29 Normal
 StopLoopingGroup writing
 
 AwaitInput
+
+PlaySound carleaving
+Explore Data/Chapter6/farmhouse.srf Data/player.srf dirtStep !Dark !Fast
+
+FreeSound carleaving
+FreeSoundGroup dirtStep
 
 ClearText
 RunScript Data/openjournal.wsp
