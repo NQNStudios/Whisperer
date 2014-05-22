@@ -11,8 +11,9 @@ LoadSurface chant7 Data/Chapter3/chant7.srf
 LoadSurface chant8 Data/Chapter3/chant8.srf
 LoadSurface tracking Data/Chapter3/tracking.srf
 
-LoadGroupSound chanting1 Data/Sounds/music_tape1.ogg
-LoadGroupSound chanting2 Data/Sounds/music_tape2.ogg
+LoadGroupSound chanting1 Data/Music/music_tape1.ogg
+LoadGroupSound chanting2 Data/Music/music_tape2.ogg
+LoadGroupSound music Data/Music/music_prologue.ogg
 
 RunScript Data/openjournal.wsp
 Update
@@ -21,7 +22,7 @@ LoopSoundGroup writing
 MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
 MakeDialog P2 journal 21 13 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -66,9 +67,6 @@ Update
 AwaitInput
 
 StopLoopingGroup chanting1
-
-Wait 750
-
 StopLoopingGroup chanting2
 
 RunScript Data/openjournal.wsp
@@ -82,9 +80,12 @@ MakeDialog P3 journal 21 1 28 29 Normal
 MakeDialog P4 journal 21 9 28 29 Normal
 MakeDialog P5 journal 21 16 28 29 Normal
 MakeDialog P6 journal 21 21 28 29 Normal
+
+LoopSoundGroup music
+
 MakeDialog P7 journal 51 1 28 29 Normal
 MakeDialog P8 journal 51 9 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -96,7 +97,7 @@ AwaitInput
 
 LoopSoundGroup writing
 MakeDialog P9 journalbubble 23 33 53 3 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -112,9 +113,12 @@ Update
 
 LoopSoundGroup writing
 MakeDialog P10 journal 51 18 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
+
+StopLoopingGroup music
+FreeSoundGroup music
 
 ClearText
 

@@ -1,0 +1,85 @@
+UnlockChapter 5
+
+LoadText Data/Chapter5/text.wsp
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug1.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug2.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug3.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug4.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug5.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug6.wav
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Normal
+MakeDialog P1 journal 21 3 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Explore Data/Chapter2/study.srf Data/player.srf carpetStep
+FreeSoundGroup carpetStep
+
+BlitSurface laptop 0 0
+BlitSurface fromakely 23 10
+
+MakeDialog EmailP1 email 24 14 51 14 Instant
+MakeDialog EmailP2 email 24 22 51 14 Instant
+Update
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog EmailP3 email 24 11 51 14 Instant
+MakeDialog EmailP4 email 24 17 51 14 Instant
+MakeDialog EmailP5 email 24 22 51 14 Instant
+Update
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog EmailP6 email 24 11 51 14 Instant
+MakeDialog EmailP7 email 24 17 51 14 Instant
+MakeDialog EmailP8.1 email 24 25 51 14 Instant
+Update
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog EmailP8.2 email 24 11 51 14 Instant
+MakeDialog EmailP9 email 24 16 51 14 Instant
+MakeDialog EmailP10 email 24 23 51 14 Instant
+Update
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog EmailP11 email 24 11 51 14 Instant
+MakeDialog EmailP12 email 24 17 51 14 Instant
+MakeDialog EmailP13 email 24 20 51 14 Instant
+Update
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog EmailP14 email 24 11 51 14 Instant
+MakeDialog EmailP15 email 24 17 51 14 Instant
+Update
+AwaitInput
+
+RunScript Data/openjournal.wsp
+MakeDialog Heading journal 21 1 28 29 Instant
+MakeDialog P1 journal 21 3 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P2 journal 21 14 28 29 Normal
+MakeDialog P3.1 journal 21 18 28 29 Normal
+MakeDialog P3.2 journal 51 1 28 29 Normal
+MakeDialog P4 journal 51 5 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearText
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
+
+StartChapter 6

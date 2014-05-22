@@ -18,6 +18,10 @@ LoadGroupSound carpetStep Data/Sounds/snd_walkingrug4.wav
 LoadGroupSound carpetStep Data/Sounds/snd_walkingrug5.wav
 LoadGroupSound carpetStep Data/Sounds/snd_walkingrug6.wav
 
+LoadGroupSound music Data/Music/music_prologue.ogg
+
+LoopSoundGroup music
+
 Clear
 RunScript Data/openjournal.wsp
 Update
@@ -26,7 +30,7 @@ LoopSoundGroup writing
 MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
 MakeDialog P2 journal 21 10 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -55,7 +59,7 @@ Update
 
 LoopSoundGroup writing
 MakeDialog P3 journal 21 12 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -85,7 +89,7 @@ Update
 
 LoopSoundGroup writing
 MakeDialog P4 journalbubble 23 33 53 5 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -95,7 +99,7 @@ Update
 
 LoopSoundGroup slowtyping
 MakeDialog WilmarthEmail1P1 email 24 14 51 14 Normal
-StopLoopingGroup
+StopLoopingGroup slowtyping
 
 AwaitEnter
 
@@ -114,7 +118,7 @@ Update
 
 LoopSoundGroup writing
 MakeDialog P5 journal 21 1 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -174,7 +178,7 @@ Wait 750
 
 LoopSoundGroup writing
 MakeDialog selfiecaption journalbubble 6 34 88 4 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -185,9 +189,12 @@ Update
 
 LoopSoundGroup writing
 MakeDialog P6 journal 21 16 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
+
+StopLoopingGroup music
+FreeSoundGroup music
 
 ClearText
 FreeSurface reformer

@@ -1,6 +1,9 @@
 UnlockChapter 4
 
 LoadText Data/Chapter4/text.wsp
+LoadImage tree Data/Chapter4/felltree-scaled.png
+LoadImage deaddogs Data/Chapter4/deaddogs-scaled.png
+LoadImage barking Data/Chapter4/barking-scaled.png
 
 RunScript Data/openjournal.wsp
 Update
@@ -12,6 +15,7 @@ StopLoopingGroup
 
 AwaitInput
 
+Clear
 BlitSurface laptop 0 0
 BlitSurface fromakeley 23 10
 MakeDialog AkeleyEmail1P1 email 24 14 51 14 Instant
@@ -23,10 +27,32 @@ AwaitInput
 BlitSurface laptop 0 0
 MakeDialog AkeleyEmail1P2.2 email 24 11 51 14 Instant
 MakeDialog AkeleyEmail1P3 email 24 15 51 14 Instant
-MakeDialog AkeleyEmail1P4.1 email 24 21 51 14 Instant
 Update
 
 AwaitInput
+
+ClearTransparent
+AddBackgroundImage tree tree 0 0
+Update
+
+Wait 750
+
+MakeDialog AkeleyEmail1P4 emailbubble 20 1 60 5 Instant
+Update
+AwaitInput
+
+MakeDialog AkeleyEmail1P5 emailbubble 20 1 60 5 Instant
+Update
+AwaitInput
+
+MakeDialog AkeleyEmail1P6 emailbubble 20 1 60 5 Instant
+Update
+AwaitInput
+
+ClearImages
+Clear
+
+FreeImage tree
 
 BlitSurface laptop 0 0
 Update
@@ -39,12 +65,29 @@ StopLoopingGroup
 
 AwaitInput
 
-BlitSurface laptop 0 0
-BlitSurface fromakeley 23 10
-MakeDialog AkeleyEmail2P1 email 24 14 51 14 Instant
-MakeDialog AkeleyEmail2P2 email 24 22 51 14 Instant
+ClearTransparent
+AddBackgroundImage barking barking 0 0
+MakeDialog AkeleyEmail2P1 emailbubble 24 35 51 4 Instant
 Update
+AwaitInput
 
+ClearImages
+FreeImage barking
+
+Clear
+ClearTransparent
+AddBackgroundImage deaddogs deaddogs 0 0
+MakeDialog AkeleyEmail2P2 emailbubble 24 35 51 3 Instant
+Update
+AwaitInput
+
+ClearImages
+FreeImage deaddogs
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail2P3 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail2P4 email 24 15 51 14 Instant
+Update
 AwaitInput
 
 BlitSurface laptop 0 0
@@ -69,7 +112,7 @@ Update
 AwaitInput
 
 BlitSurface laptop 0 0
-BlitSurface fromakeley 23 10
+BlitSurface fromakely 23 10
 MakeDialog AkeleyEmail3 email 24 14 51 14 Instant
 Update
 
@@ -218,4 +261,11 @@ Update
 AwaitInput
 
 ClearText
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
+
 StartChapter 5

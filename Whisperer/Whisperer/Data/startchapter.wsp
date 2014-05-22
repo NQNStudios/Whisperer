@@ -10,6 +10,7 @@ LoadSound bookopen Data/Sounds/snd_bookopen.wav
 
 LoadSurface laptop Data/laptop.srf
 LoadSurface fromakeley Data/email-akeley-zmail.srf
+LoadSurface fromakely Data/email-akely-zmail.srf
 LoadSurface reply Data/email-reply-zmail.srf
 LoadSurface sending Data/email-sending.srf
 LoadSurface sent Data/email-sent.srf
