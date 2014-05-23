@@ -15,8 +15,6 @@ LoadGroupSound carpetStep Data/Sounds/snd_walkingrug1.wav
 LoadGroupSound carpetStep Data/Sounds/snd_walkingrug2.wav
 LoadGroupSound carpetStep Data/Sounds/snd_walkingrug3.wav
 LoadGroupSound carpetStep Data/Sounds/snd_walkingrug4.wav
-LoadGroupSound carpetStep Data/Sounds/snd_walkingrug5.wav
-LoadGroupSound carpetStep Data/Sounds/snd_walkingrug6.wav
 
 LoadGroupSound music Data/Music/music_prologue.ogg
 
@@ -196,6 +194,7 @@ AwaitInput
 StopLoopingGroup music
 FreeSoundGroup music
 
+ClearGlyphs
 ClearText
 FreeSurface reformer
 

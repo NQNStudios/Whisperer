@@ -119,13 +119,13 @@ Update
 Wait 750
 
 LoopSoundGroup writing
-MakeDialog P8 journalbubble 2 36 96 4 Normal
+MakeDialog P8 journalbubble 2 36 96 5 Normal
 StopLoopingGroup writing
 AwaitInput
 
 Clear
 LoopSoundGroup writing
-MakeDialog P9 journalbubble 2 36 96 4 Normal
+MakeDialog P9 journalbubble 2 36 96 5 Normal
 StopLoopingGroup writing
 AwaitInput
 

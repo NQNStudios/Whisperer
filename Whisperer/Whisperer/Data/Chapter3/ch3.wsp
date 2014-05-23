@@ -11,6 +11,9 @@ LoadSurface chant7 Data/Chapter3/chant7.srf
 LoadSurface chant8 Data/Chapter3/chant8.srf
 LoadSurface tracking Data/Chapter3/tracking.srf
 
+LoadSound tapestart Data/Chapter3/snd_tapestart.wav
+LoadSound tapestop Data/Chapter3/snd_tapestop.wav
+
 LoadGroupSound chanting1 Data/Music/music_tape1.ogg
 LoadGroupSound chanting2 Data/Music/music_tape2.ogg
 LoadGroupSound music Data/Music/music_prologue.ogg
@@ -28,6 +31,8 @@ AwaitInput
 
 Clear
 Update
+
+PlaySound tapestart
 
 LoopSoundGroup chanting1
 Wait 8000
@@ -68,6 +73,14 @@ AwaitInput
 
 StopLoopingGroup chanting1
 StopLoopingGroup chanting2
+PlaySound tapestop
+
+Clear
+Update
+Wait 750
+
+FreeSound tapestart
+FreeSound tapestop
 
 RunScript Data/openjournal.wsp
 Update
@@ -120,6 +133,7 @@ AwaitInput
 StopLoopingGroup music
 FreeSoundGroup music
 
+ClearGlyphs
 ClearText
 
 FreeSurface chant1

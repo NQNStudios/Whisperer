@@ -84,7 +84,9 @@ int playerX = 0;
 int playerY = 0;
 float playerFloatX = 0.0f;
 float playerFloatY = 0.0f;
+bool goingFast = false;
 const float kPlayerSpeed = 2.0f;
+const float kPlayerFastSpeed = 4.0f;
 
 bool movingLeft = false;
 bool movingRight = false;
@@ -342,11 +344,13 @@ void RunLine(const char* line)
 		std::string mapPath;
 		std::string playerPath;
 		std::string darkStr;
+		std::string fastStr;
 
 		sstream >> mapPath;
 		sstream >> playerPath;
 		sstream >> footstepGroup;
 		sstream >> darkStr;
+		sstream >> fastStr;
 
 		exploring = true;
 		mapSurface = ascii::Surface::FromFile(mapPath.c_str());
@@ -367,6 +371,8 @@ void RunLine(const char* line)
 		}
 
 		dark = !darkStr.compare("Dark");
+
+		goingFast = !fastStr.compare("Fast");
 	}
 
 	if (!command.compare("StopExploring"))
@@ -1097,8 +1103,10 @@ void Update(ascii::Game* game, int deltaMS)
 			dy /= mag;
 		}
 
-		playerFloatX += dx * kPlayerSpeed * elapsedSec;
-		playerFloatY += dy * kPlayerSpeed * elapsedSec;
+		float speed = (goingFast ? kPlayerFastSpeed : kPlayerSpeed);
+
+		playerFloatX += dx * speed * elapsedSec;
+		playerFloatY += dy * speed * elapsedSec;
 
 
 		int newX = (int)playerFloatX;
@@ -1120,6 +1128,9 @@ void Update(ascii::Game* game, int deltaMS)
 			{
 				//end the exploration
 				RunLine("StopExploring");
+
+				exploring = false;
+				return;
 			}
 			else
 			{

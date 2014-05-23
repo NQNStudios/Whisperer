@@ -5,13 +5,51 @@ LoadImage tree Data/Chapter4/felltree-scaled.png
 LoadImage deaddogs Data/Chapter4/deaddogs-scaled.png
 LoadImage barking Data/Chapter4/barking-scaled.png
 
+LoadGroupSound barking Data/Chapter4/snd_barking1.wav
+LoadGroupSound barking Data/Chapter4/snd_barking2.wav
+LoadGroupSound barking Data/Chapter4/snd_barking3.wav
+LoadGroupSound barking Data/Chapter4/snd_barking4.wav
+LoadGroupSound barking Data/Chapter4/snd_barking5.wav
+LoadGroupSound barking Data/Chapter4/snd_barking6.wav
+LoadGroupSound barking Data/Chapter4/snd_barking7.wav
+LoadGroupSound barking Data/Chapter4/snd_barking8.wav
+LoadGroupSound barking Data/Chapter4/snd_barking9.wav
+LoadGroupSound barking Data/Chapter4/snd_barkleft1.wav
+LoadGroupSound barking Data/Chapter4/snd_barkleft2.wav
+LoadGroupSound barking Data/Chapter4/snd_barkleft3.wav
+LoadGroupSound barking Data/Chapter4/snd_barkleft4.wav
+LoadGroupSound barking Data/Chapter4/snd_barkright1.wav
+LoadGroupSound barking Data/Chapter4/snd_barkright2.wav
+LoadGroupSound barking Data/Chapter4/snd_barkright3.wav
+LoadGroupSound barking Data/Chapter4/snd_barkright4.wav
+
+LoadGroupSound gunshot Data/Chapter4/snd_gunshot1.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunshot2.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunshot3.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunshot4.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunshot5.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunleft1.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunleft2.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunleft3.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunleft4.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunleft5.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunright1.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunright2.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunright3.wav
+LoadGroupSound gunshot Data/Chapter4/snd_gunright4.wav
+
+LoadGroupSound barkingchorus Data/Chapter4/snd_barkingdouble.wav
+LoadGroupSound barkingchorus Data/Chapter4/snd_barkingtriple.wav
+
+LoadGroupSound music Data/Music/music_prologue.ogg
+
 RunScript Data/openjournal.wsp
 Update
 
 LoopSoundGroup writing
 MakeDialog Heading journal 21 1 28 29 Slow
 MakeDialog P1 journal 21 3 28 29 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -33,6 +71,7 @@ AwaitInput
 
 ClearTransparent
 AddBackgroundImage tree tree 0 0
+LoopSoundGroup barkingchorus
 Update
 
 Wait 750
@@ -51,6 +90,7 @@ AwaitInput
 
 ClearImages
 Clear
+StopLoopingGroup barkingchorus
 
 FreeImage tree
 
@@ -61,7 +101,7 @@ Wait 250
 
 LoopSoundGroup writing
 MakeDialog P2 journalbubble 25 33 50 4 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -69,10 +109,74 @@ ClearTransparent
 AddBackgroundImage barking barking 0 0
 MakeDialog AkeleyEmail2P1 emailbubble 24 35 51 4 Instant
 Update
+
+PlaySoundGroup barking
+Wait 250
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup barking
+Wait 50
+PlaySoundGroup gunshot
+Wait 150
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+Wait 200
+PlaySoundGroup barking
+Wait 250
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+Wait 50
+PlaySoundGroup barking
+Wait 250
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+Wait 50
+PlaySoundGroup gunshot
+Wait 150
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+Wait 200
+PlaySoundGroup barking
+Wait 250
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+Wait 500
+PlaySoundGroup gunshot
+Wait 250
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup barking
+Wait 50
+PlaySoundGroup gunshot
+Wait 150
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+Wait 200
+PlaySoundGroup barking
+Wait 250
+PlaySoundGroup barking
+Wait 150
+PlaySoundGroup gunshot
+
+LoopSoundGroup barkingchorus
+
 AwaitInput
+
+StopLoopingGroup barkingchorus
+FreeSoundGroup barkingchorus
+FreeSoundGroup barking
+FreeSoundGroup gunshot
 
 ClearImages
 FreeImage barking
+
+LoopSoundGroup music
 
 Clear
 ClearTransparent
@@ -97,7 +201,7 @@ Update
 LoopSoundGroup fasttyping
 MakeDialog WilmarthEmail1P1 email 24 14 51 14 Normal
 MakeDialog WilmarthEmail1P2 email 24 18 51 14 Normal
-StopLoopingGroup
+StopLoopingGroup fasttyping
 
 AwaitEnter
 
@@ -124,7 +228,7 @@ Update
 
 LoopSoundGroup fasttyping
 MakeDialog WilmarthEmail2 email 24 14 51 14 Fast
-StopLoopingGroup
+StopLoopingGroup fasttyping
 
 AwaitEnter
 
@@ -154,7 +258,7 @@ Update
 LoopSoundGroup fasttyping
 MakeDialog WilmarthEmail3P1 email 24 14 51 14 Fast
 MakeDialog WilmarthEmail3P2 email 24 18 51 14 Fast
-StopLoopingGroup
+StopLoopingGroup fasttyping
 
 AwaitEnter
 
@@ -175,7 +279,7 @@ Wait 250
 
 LoopSoundGroup writing
 MakeDialog P3 journalbubble 25 33 50 5 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -225,7 +329,7 @@ Wait 250
 
 LoopSoundGroup writing
 MakeDialog P4 journalbubble 25 33 50 5 Normal
-StopLoopingGroup
+StopLoopingGroup writing
 
 AwaitInput
 
@@ -260,6 +364,10 @@ MakeDialog AkeleyEmail7P10 email 24 14 51 14 Instant
 Update
 AwaitInput
 
+StopLoopingGroup music
+FreeSoundGroup music
+
+ClearGlyphs
 ClearText
 
 RunScript Data/openjournal.wsp
