@@ -1,0 +1,193 @@
+LoadText Data/Chapter1/text.wsp
+LoadImage ford Data/Chapter1/fordinterior-scaled.png
+LoadImage body Data/Chapter1/bodyphoto-scaled.png
+LoadSurface herald Data/Chapter1/herald.srf
+
+LoadImage flight Data/Chapter1/silhouette-scaled.png
+LoadImage stream Data/Chapter1/Streams-scaled.png
+
+LoadGroupSound music Data/Music/music_prologue.ogg
+
+LoopSoundGroup music
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Clear
+ClearTransparent
+AddBackgroundImage ford ford 0 0
+Update
+
+LoopSoundGroup writing
+MakeDialog P2.1 journalbubble 25 1 50 4 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P2.2 journalbubble 25 1 50 4 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearImages
+FreeImage ford
+
+RunScript Data/openjournal.wsp
+MakeDialog Heading journal 21 1 28 29 Instant
+MakeDialog P1 journal 21 3 28 29 Instant
+MakeDialog P2 journal 21 17 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P3 journal 51 1 28 29 Normal
+MakeDialog P4 journal 51 11 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+RunScript Data/openjournal.wsp
+
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P5.1 journal 21 1 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Clear
+ClearTransparent
+AddBackgroundImage body body 0 0
+Update
+
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P5.2 journalbubble 3 1 60 5 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearImages
+FreeImage body
+
+RunScript Data/openjournal.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
+
+LoopSoundGroup writing
+MakeDialog P6 journal 21 12 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Clear
+BlitSurface herald 0 0
+MakeDialog herald-title herald 1 9 34 33 Instant
+MakeDialog herald-P1 herald 1 12 34 33 Instant
+MakeDialog herald-P2 herald 1 18 34 33 Instant
+MakeDialog herald-P3 herald 1 24 34 33 Instant
+MakeDialog herald-P4 herald 38 9 34 33 Instant
+MakeDialog herald-P5 herald 38 16 34 33 Instant
+MakeDialog herald-P6 herald 38 25 34 33 Instant
+Update
+
+AwaitInput
+
+FreeSurface herald
+
+Clear
+RunScript Data/openjournal.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
+MakeDialog P6 journal 21 12 28 29 Instant
+
+LoopSoundGroup writing
+MakeDialog P7.1 journal 21 22 28 29 Normal
+MakeDialog P7.2 journal 51 1 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearTransparent
+AddBackgroundImage flight flight 0 0
+Update
+
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P8 journalbubble 2 36 96 5 Normal
+StopLoopingGroup writing
+AwaitInput
+
+Clear
+LoopSoundGroup writing
+MakeDialog P9 journalbubble 2 36 96 5 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+FreeImage flight
+ClearOpaque
+RunScript Data/openjournal.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
+MakeDialog P6 journal 21 12 28 29 Instant
+MakeDialog P7.1 journal 21 22 28 29 Instant
+MakeDialog P7.2 journal 51 1 28 29 Instant
+MakeDialog P8 journal 51 4 28 29 Instant
+MakeDialog P9 journal 51 13 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P10 journal 51 18 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearTransparent
+AddBackgroundImage stream stream 0 0
+Update
+
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P11 journalbubble 1 1 45 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+Clear
+LoopSoundGroup writing
+MakeDialog P12 journalbubble 1 1 45 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+FreeImage stream
+
+RunScript Data/openjournal.wsp
+MakeDialog P11 journal 21 1 28 29 Instant
+MakeDialog P12 journal 21 8 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P13 journal 21 16 28 29 Normal
+StopLoopingGroup writing
+
+ClearGlyphs
+ClearText
+
+AwaitInput
+
+StopLoopingGroup music
+FreeSoundGroup music
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
+
+StartChapter 2

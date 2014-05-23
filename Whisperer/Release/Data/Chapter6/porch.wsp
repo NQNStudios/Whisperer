@@ -1,0 +1,11 @@
+LoopSoundGroup writing
+MakeDialog P17 journalbubble 25 33 50 6 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P18 journalbubble 25 33 50 6 Normal
+StopLoopingGroup writing
+
+AwaitInput

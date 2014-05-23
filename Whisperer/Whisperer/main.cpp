@@ -154,7 +154,7 @@ void writeOpenChapters()
 void loadOpenChapters()
 {
 	chapterOpen = new bool[8];
-	chapterOpen[0] = true;
+	chapterOpen[0] = false;
 	chapterOpen[1] = false;
 	chapterOpen[2] = false;
 	chapterOpen[3] = false;
@@ -253,6 +253,17 @@ void RunLine(const char* line)
 
 	std::string command;
 	sstream >> command;
+
+	if (!command.compare("SetSoundVolume"))
+	{
+		float volume;
+		sstream >> volume;
+
+		game->soundManager()->setSoundVolume(volume);
+
+		Ready();
+		return;
+	}
 
 	if (!command.compare("LoadGroupSound"))
 	{
@@ -880,10 +891,6 @@ void RunLine(const char* line)
 		Ready();
 		return;
 	}
-
-
-
-	std::cout << "ERROR: Invalid script command used: " << command << std::endl;
 }
 
 void RunScript(const char* path)
@@ -1281,7 +1288,7 @@ void Update(ascii::Game* game, int deltaMS)
 
 				int levelY = y - kMainMenuY - kFirstEntryY - 1;
 
-				if (!chapterOpen[levelY - 1])
+				if (levelY >= 1 && !chapterOpen[levelY - 1])
 				{
 					color = ascii::Color::Gray;
 				}
@@ -1356,7 +1363,7 @@ void handleSkip(ascii::Input& input)
 
 void HandleInput(ascii::Game* game, ascii::Input& input)
 {
-	logMousePos(input);
+	//logMousePos(input);
 
 	if (waitingForInput)
 	{
@@ -1382,7 +1389,7 @@ void HandleInput(ascii::Game* game, ascii::Input& input)
 
 	keyPressed = input.anyKeyPressed();
 
-	handleSkip(input);
+	//handleSkip(input);
 
 	movingLeft = false;
 	movingRight = false;

@@ -1,0 +1,4 @@
+Clear
+BlitSurface desk 0 0
+BlitSurface journal-open 18 0
+Update

@@ -1,0 +1,321 @@
+UnlockChapter 8
+LoadText Data/Chapter8/text.wsp
+
+LoadImage driving Data/Chapter1/fordinterior-scaled.png
+LoadImage empty Data/Chapter8/empty-scaled.png
+LoadImage darkbedroom Data/Chapter7/darkbedroom-scaled.png
+LoadImage brattleboro Data/Chapter8/brattleboro-scaled.png
+LoadImage scare Data/Chapter8/scare-scaled.png
+
+LoadGroupSound woodStep Data/Sounds/snd_walkingwood1.wav
+LoadGroupSound woodStep Data/Sounds/snd_walkingwood2.wav
+LoadGroupSound woodStep Data/Sounds/snd_walkingwood3.wav
+
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt1.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt2.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt3.wav
+LoadGroupSound dirtStep Data/Chapter6/snd_walkingdirt4.wav
+
+LoadGroupSound music Data/Music/music_act8.ogg
+
+LoadSound creaking Data/Chapter8/snd_creakingfloor.wav
+LoadSound latch Data/Chapter8/snd_fumblinglatch2.wav
+LoadSound scare Data/Chapter8/snd_scare.wav
+
+LoadStyle buzz Data/buzzstyle.wsp
+LoadStyle machine Data/machinevoicestyle.wsp
+LoadStyle voice Data/voicestyle.wsp
+
+LoadGroupSound machine Data/Chapter7/snd_alienbrain.wav
+LoadSound flapping Data/Chapter8/snd_migowings.wav
+LoadSound car Data/Chapter6/snd_carleaving.wav
+
+LoopSoundGroup music
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+StopLoopingGroup writing
+
+Wait 750
+ClearTransparent
+AddBackgroundImage darkbedroom darkbedroom 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P1 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P2 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+ClearTransparent
+AddBackgroundImage driving driving 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P3 journalbubble 25 1 50 5 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+ClearTransparent
+AddBackgroundImage empty empty 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P4 journalbubble 25 32 50 7 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P5 journalbubble 25 32 50 7 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P6 journalbubble 25 32 50 7 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+ClearTransparent
+AddBackgroundImage brattleboro brattleboro 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P7 journalbubble 4 35 55 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P8 journalbubble 4 35 55 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P9 journalbubble 4 35 55 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P11 journalbubble 4 35 55 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P12 journalbubble 4 35 55 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+ClearOpaque
+RunScript Data/openjournal.wsp
+Update
+
+LoopSoundGroup writing
+MakeDialog P13 journal 21 1 28 29 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearTransparent
+AddBackgroundImage darkbedroom darkbedroom 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P14 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P15 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P16 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearTransparent
+Update
+PlaySound creaking
+Wait 7025
+PlaySound latch
+Wait 2050
+
+LoopSoundGroup writing
+MakeDialog P17 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P18 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearTransparent
+Update
+
+Wait 750
+
+SetSoundVolume 0.5
+
+LoopSoundGroup machine
+MakeDialog Dialog1 machine 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog2 machine 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog3 machine 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog4 machine 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog5 machine 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog6 machine 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog7 machine 43 28 50 6 Normal
+AwaitInput
+StopLoopingGroup machine
+
+ClearTransparent
+Update
+Wait 750
+
+MakeDialog Dialog8 buzz 43 28 50 6 Normal
+AwaitInput
+
+ClearTransparent
+Update
+Wait 750
+
+MakeDialog Dialog9 voice 43 28 50 6 Normal
+AwaitInput
+
+ClearTransparent
+Update
+Wait 750
+
+MakeDialog Dialog10 buzz 43 28 50 6 Normal
+AwaitInput
+MakeDialog Dialog11 buzz 43 28 50 6 Normal
+AwaitInput
+
+ClearTransparent
+Update
+Wait 750
+
+MakeDialog Dialog12 voice 43 28 50 6 Normal
+AwaitInput
+
+ClearTransparent
+Update
+
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+Wait 300
+PlaySoundGroup woodStep
+
+Wait 500
+PlaySoundGroup dirtStep
+Wait 300
+PlaySoundGroup dirtStep
+Wait 300
+PlaySoundGroup dirtStep
+Wait 300
+PlaySoundGroup dirtStep
+Wait 300
+
+PlaySound flapping
+Wait 500
+
+PlaySoundGroup dirtStep
+Wait 300
+PlaySoundGroup dirtStep
+Wait 300
+PlaySoundGroup dirtStep
+Wait 300
+
+Wait 2750
+
+SetSoundVolume 0.7
+PlaySound car
+Wait 8500
+SetSoundVolume 1.0
+
+Wait 50
+
+LoopSoundGroup writing
+MakeDialog P19 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P20 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P21 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P22 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P23 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+StopLoopingGroup music
+
+ClearImages
+Explore Data/Chapter8/interior.srf Data/player.srf woodStep Dark !Fast
+
+ClearTransparent
+AddBackgroundImage scare scare 0 0
+
+PlaySound scare
+Update
+
+Wait 4500
+LoopSoundGroup writing
+MakeDialog P31 journalbubble 25 35 50 4 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+FreeImage driving
+FreeImage empty
+FreeImage darkbedroom
+FreeImage brattleboro
+FreeImage dooropen
+FreeImage doorclosed
+FreeImage scare
+
+FreeSoundGroup woodStep
+
+FreeSound creaking
+FreeSound latch
+FreeSound scare
+FreeSound flapping
+
+RunScript Data/finalanimation.wsp

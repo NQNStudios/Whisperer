@@ -1,0 +1,209 @@
+UnlockChapter 2
+
+LoadText Data/Chapter2/text.wsp
+
+LoadSurface reformer Data/Chapter2/reformer.srf
+LoadStyle reformer Data/Chapter2/reformerstyle.wsp
+LoadImage wilmarth Data/Chapter2/wilmarth.png
+
+LoadImage clawprint Data/Chapter2/clawprintredo-cropped.png
+LoadImage stonecircle Data/Chapter2/stonecircle-scaled.png
+LoadImage blackstone Data/Chapter2/blackstone-scaled.png
+LoadImage farmhouse Data/Chapter2/farmhouse-scaled.png
+
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug1.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug2.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug3.wav
+LoadGroupSound carpetStep Data/Sounds/snd_walkingrug4.wav
+
+LoadGroupSound music Data/Music/music_prologue.ogg
+
+LoopSoundGroup music
+
+Clear
+RunScript Data/openjournal.wsp
+Update
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+MakeDialog P2 journal 21 10 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Clear
+BlitSurface reformer 0 0
+MakeDialog RebuttalTitle reformer 0 14 25 25 Instant
+MakeDialog RebuttalP1 reformer 0 17 25 25 Instant
+MakeDialog RebuttalP2.1 reformer 0 33 25 25 Instant
+MakeDialog RebuttalP2.2 reformer 25 14 25 25 Instant
+MakeDialog RebuttalP3 reformer 25 22 25 25 Instant
+MakeDialog RebuttalP4.1 reformer 25 34 25 25 Instant
+MakeDialog RebuttalP4.2 reformer 50 14 25 25 Instant
+AddForegroundImage wilmarth wilmarth 51 23
+Update
+
+AwaitInput
+
+Clear
+ClearImages
+FreeImage wilmarth
+
+RunScript Data/openjournal.wsp
+MakeDialog P1 journal 21 3 28 29 Instant
+MakeDialog P2 journal 21 10 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P3 journal 21 12 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Explore Data/Chapter2/study.srf Data/player.srf carpetStep
+
+FreeSoundGroup carpetStep
+
+BlitSurface laptop 0 0
+BlitSurface fromakeley 23 10
+MakeDialog AkeleyEmail1P1 email 24 14 51 14 Instant
+MakeDialog AkeleyEmail1P2 email 24 16 51 14 Instant
+MakeDialog AkeleyEmail1P3.1 email 24 24 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+MakeDialog AkeleyEmail1P3.2 email 24 11 51 14 Instant
+MakeDialog AkeleyEmail1P4 email 24 15 51 14 Instant
+Update
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+LoopSoundGroup writing
+MakeDialog P4 journalbubble 23 33 53 5 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface reply 23 10
+Update
+
+LoopSoundGroup slowtyping
+MakeDialog WilmarthEmail1P1 email 24 14 51 14 Normal
+StopLoopingGroup slowtyping
+
+AwaitEnter
+
+BlitSurface sending 23 10
+Update
+Wait 750
+
+BlitSurface laptop 0 0
+BlitSurface sent 23 10
+Update
+
+AwaitInput
+
+RunScript Data/openjournal.wsp
+Update
+
+LoopSoundGroup writing
+MakeDialog P5 journal 21 1 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearTransparent
+AddBackgroundImage stonecircle stonecircle 0 0
+Update
+
+Wait 750
+MakeDialog circlecaption1 emailbubble 2 34 96 4 Instant
+Update
+
+AwaitInput
+
+MakeDialog circlecaption2 emailbubble 2 34 96 4 Instant
+Update
+
+AwaitInput
+
+ClearImages
+FreeImage stonecircle
+
+BlitSurface laptop 0 0
+AddForegroundImage clawprint clawprint 25 10
+Update
+
+Wait 750
+
+MakeDialog clawprintcaption emailbubble 6 34 88 4 Instant
+Update
+
+AwaitInput
+
+Clear
+ClearImages
+FreeImage clawprint
+
+ClearTransparent
+AddBackgroundImage blackstone blackstone 0 0
+Update
+
+Wait 750
+
+MakeDialog blackstonecaption emailbubble 6 34 88 4 Instant
+Update
+
+AwaitInput
+
+Clear
+ClearImages
+FreeImage blackstone
+
+ClearTransparent
+AddBackgroundImage farmhouse farmhouse 0 0
+Update
+
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog selfiecaption journalbubble 6 34 88 4 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+RunScript data/openjournal.wsp
+MakeDialog P5 journal 21 1 28 29 Instant
+MakeDialog selfiecaption journal 21 11 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P6 journal 21 16 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+StopLoopingGroup music
+FreeSoundGroup music
+
+ClearGlyphs
+ClearText
+FreeSurface reformer
+
+FreeStyle reformer
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
+
+StartChapter 3

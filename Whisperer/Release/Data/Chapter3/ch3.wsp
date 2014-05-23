@@ -1,0 +1,155 @@
+UnlockChapter 3
+
+LoadText Data/Chapter3/text.wsp
+LoadSurface chant1 Data/Chapter3/chant1.srf
+LoadSurface chant2 Data/Chapter3/chant2.srf
+LoadSurface chant3 Data/Chapter3/chant3.srf
+LoadSurface chant4 Data/Chapter3/chant4.srf
+LoadSurface chant5 Data/Chapter3/chant5.srf
+LoadSurface chant6 Data/Chapter3/chant6.srf
+LoadSurface chant7 Data/Chapter3/chant7.srf
+LoadSurface chant8 Data/Chapter3/chant8.srf
+LoadSurface tracking Data/Chapter3/tracking.srf
+
+LoadSound tapestart Data/Chapter3/snd_tapestart.wav
+LoadSound tapestop Data/Chapter3/snd_tapestop.wav
+
+LoadGroupSound chanting1 Data/Music/music_tape1.ogg
+LoadGroupSound chanting2 Data/Music/music_tape2.ogg
+LoadGroupSound music Data/Music/music_prologue.ogg
+
+RunScript Data/openjournal.wsp
+Update
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+MakeDialog P2 journal 21 13 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Clear
+Update
+
+PlaySound tapestart
+
+LoopSoundGroup chanting1
+Wait 8000
+
+BlitSurface chant1 0 17
+Update
+AwaitInput
+
+BlitSurface chant2 0 17
+Update
+AwaitInput
+
+BlitSurface chant3 0 17
+Update
+AwaitInput
+
+BlitSurface chant4 0 17
+Update
+AwaitInput
+
+BlitSurface chant5 0 17
+Update
+AwaitInput
+
+LoopSoundGroup chanting2
+
+BlitSurface chant6 0 17
+Update
+AwaitInput
+
+BlitSurface chant7 0 17
+Update
+AwaitInput
+
+BlitSurface chant8 0 17
+Update
+AwaitInput
+
+StopLoopingGroup chanting1
+StopLoopingGroup chanting2
+PlaySound tapestop
+
+Clear
+Update
+Wait 750
+
+FreeSound tapestart
+FreeSound tapestop
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
+
+LoopSoundGroup writing
+MakeDialog P3 journal 21 1 28 29 Normal
+MakeDialog P4 journal 21 9 28 29 Normal
+MakeDialog P5 journal 21 16 28 29 Normal
+MakeDialog P6 journal 21 21 28 29 Normal
+
+LoopSoundGroup music
+
+MakeDialog P7 journal 51 1 28 29 Normal
+MakeDialog P8 journal 51 9 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+BlitSurface laptop 0 0
+BlitSurface tracking 23 10
+Update
+
+AwaitInput
+
+LoopSoundGroup writing
+MakeDialog P9 journalbubble 23 33 53 3 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+RunScript Data/openjournal.wsp
+MakeDialog P3 journal 21 1 28 29 Instant
+MakeDialog P4 journal 21 9 28 29 Instant
+MakeDialog P5 journal 21 16 28 29 Instant
+MakeDialog P6 journal 21 21 28 29 Instant
+MakeDialog P7 journal 51 1 28 29 Instant
+MakeDialog P8 journal 51 9 28 29 Instant
+MakeDialog P9 journal 51 15 28 29 Instant
+Update
+
+LoopSoundGroup writing
+MakeDialog P10 journal 51 18 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+StopLoopingGroup music
+FreeSoundGroup music
+
+ClearGlyphs
+ClearText
+
+FreeSurface chant1
+FreeSurface chant2
+FreeSurface chant3
+FreeSurface chant4
+FreeSurface chant5
+FreeSurface chant6
+FreeSurface chant7
+FreeSurface chant8
+FreeSurface tracking
+
+RunScript Data/openjournal.wsp
+Update
+
+PlaySoundGroup pageturn
+Wait 1000
+
+StartChapter 4

@@ -1,0 +1,13 @@
+LoadSurface credits Data/credits.srf
+
+TweenSurface menu 40 5 40 -22 40 Data/menustep.wsp
+
+TweenSurface credits 30 -22 30 5 40 Data/menustep.wsp
+
+AwaitInput
+
+TweenSurface credits 30 5 30 -22 40 Data/menustep.wsp
+
+FreeSurface credits
+
+RunScript Data/menustart.wsp

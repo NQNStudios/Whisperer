@@ -1,0 +1,19 @@
+RunScript Data/openjournal.wsp
+MakeDialog PLast journal 21 1 28 29 Instant
+Update
+
+Wait 2000
+
+PlaySound bookclose
+BlitSurface desk 0 0
+BlitSurface journal 18 0
+Update
+
+Wait 2000
+PlaySound bookslide
+TweenSurface journal 18 0 18 40 20 Data/menustep.wsp
+
+ClearText
+ClearGlyphs
+
+RunScript Data/menustart.wsp

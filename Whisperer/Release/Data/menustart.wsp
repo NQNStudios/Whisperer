@@ -1,0 +1,12 @@
+LoadSurface desk Data/desk.srf
+LoadSurface menu Data/menu.srf
+
+Clear
+BlitSurface desk 0 0
+Update
+
+Wait 500
+
+TweenSurface menu 40 -22 40 5 40 Data/menustep.wsp
+
+RunMainMenu
