@@ -1,0 +1,229 @@
+UnlockChapter 7
+LoadText Data/Chapter7/text.wsp
+
+LoadStyle akeley Data/akeleyvoicestyle.wsp
+LoadSurface trail Data/Chapter7/bubbletrail.srf
+
+LoadImage whisperer Data/Chapter7/whisperer-scaled.png
+LoadImage bedroom Data/Chapter7/lightbedroom-scaled.png
+LoadImage darkbedroom Data/Chapter7/darkbedroom-scaled.png
+
+LoadSurface machine Data/Chapter7/machine.srf
+LoadSurface canister Data/Chapter7/canister.srf
+
+LoadStyle machine Data/machinevoicestyle.wsp
+
+LoadGroupSound brain Data/Chapter7/snd_alienbrain.wav
+LoadSound clock Data/Chapter7/snd_clock.wav
+LoadSound doorcreak Data/Chapter7/snd_doorcreak.wav
+LoadSound canister Data/Chapter7/snd_metalcanister.wav
+
+LoadGroupSound woodStep Data/Sounds/snd_walkingwood1.wav
+LoadGroupSound woodStep Data/Sounds/snd_walkingwood2.wav
+LoadGroupSound woodStep Data/Sounds/snd_walkingwood3.wav
+
+LoopSoundGroup writing
+MakeDialog Heading journal 21 1 28 29 Slow
+MakeDialog P1 journal 21 3 28 29 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+Clear
+Update
+PlaySound doorcreak
+Wait 7500
+FreeSound doorcreak
+
+LoopSoundGroup writing
+MakeDialog P2 journalbubble 25 32 50 5 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearTransparent
+AddBackgroundImage whisperer whisperer 0 0
+Update
+
+Wait 750
+LoopSoundGroup writing
+MakeDialog P3 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearTransparent
+LoopSoundGroup writing
+MakeDialog P4 journalbubble 25 32 50 4 Normal
+StopLoopingGroup writing
+
+AwaitInput
+
+ClearTransparent
+BlitSurface trail 62 10
+MakeDialog AkeleyDialog1 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog2 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog3 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog4 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog5 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog6 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog7 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog8 akeley 2 4 60 7 Normal
+AwaitInput
+MakeDialog AkeleyDialog9 akeley 2 4 60 7 Normal
+AwaitInput
+
+ClearTransparent
+Update
+Wait 750
+
+MakeDialog P5 journalbubble 25 32 50 6 Normal
+AwaitInput
+
+ClearTransparent
+MakeDialog P6 journalbubble 25 32 50 4 Normal
+AwaitInput
+
+ClearImages
+Explore Data/Chapter7/interior.srf Data/player.srf woodStep !Dark !Fast
+
+ClearTransparent
+AddBackgroundImage bedroom bedroom 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P8 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P9 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+
+ClearTransparent
+AddBackgroundImage whisperer whisperer 0 0
+Update
+
+Wait 750
+BlitSurface trail 62 10
+MakeDialog AkeleyDialog10 akeley 2 2 60 9 Normal
+AwaitInput
+
+ClearImages
+ClearOpaque
+BlitSurface machine 0 0
+BlitSurface canister 70 26
+Update
+
+Wait 750
+MakeDialog AkeleyDialog11 akeley 2 2 60 9 Normal
+AwaitInput
+MakeDialog AkeleyDialog12 akeley 2 2 60 9 Normal
+AwaitInput
+MakeDialog AkeleyDialog13 akeley 2 2 60 9 Normal
+AwaitInput
+
+TweenSurface canister 70 26 70 22 50 Data/Chapter7/machinestep.wsp
+Wait 100
+TweenSurface canister 70 22 45 22 50 Data/Chapter7/machinestep.wsp
+PlaySound canister
+Wait 4500
+
+LoopSoundGroup brain
+MakeDialog BrainDialog1 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog2 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog3 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog4 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog5 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog6 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog7 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog8 machine 2 2 60 9 Normal
+AwaitInput
+MakeDialog BrainDialog9 machine 2 2 60 9 Normal
+AwaitInput
+StopLoopingGroup brain
+
+ClearTransparent
+AddBackgroundImage whisperer whisperer 0 0
+Update
+Wait 750
+MakeDialog AkeleyDialog14 akeley 2 2 60 9 Normal
+AwaitInput
+
+ClearImages
+ClearTransparent
+AddBackgroundImage bedroom bedroom 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P10 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P11 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P12 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P13 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P14 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P15 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearImages
+ClearTransparent
+AddBackgroundImage bedroom darkbedroom 0 0
+Update
+Wait 750
+
+LoopSoundGroup writing
+MakeDialog P16 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+LoopSoundGroup writing
+MakeDialog P17 journalbubble 25 32 50 6 Normal
+StopLoopingGroup writing
+AwaitInput
+
+ClearGlyphs
+ClearText
+
+FreeStyle akeley
+FreeStyle machine
+
+FreeImage bedroom
+FreeImage darkbedroom
+
+RunScript Data/openjournal.wsp
+Update
+PlaySoundGroup pageturn
+Wait 1000
+StartChapter 8

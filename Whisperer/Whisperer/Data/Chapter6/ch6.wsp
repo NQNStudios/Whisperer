@@ -59,19 +59,21 @@ ClearTransparent
 AddBackgroundImage farmroad farmroad 0 0
 Update
 Wait 750
-MakeDialog BrownDialog1 voice 17 33 40 6 Instant
+MakeDialog BrownDialog1 voice 17 33 40 6 Normal
 Update
 AwaitInput
 
 Clear
-MakeDialog BrownDialog2 voice 17 33 40 6 Instant
+MakeDialog BrownDialog2 voice 17 33 40 6 Normal
 Update
 AwaitInput
 
 Clear
-MakeDialog BrownDialog3 voice 17 33 40 6 Instant
+MakeDialog BrownDialog3 voice 17 33 40 6 Normal
 Update
 AwaitInput
+
+FreeStyle voice
 
 RunScript Data/openjournal.wsp
 MakeDialog P8 journal 21 1 28 29 Instant
@@ -105,6 +107,7 @@ Explore Data/Chapter6/farmhouse.srf Data/player.srf dirtStep !Dark !Fast
 FreeSound carleaving
 FreeSoundGroup dirtStep
 
+ClearGlyphs
 ClearText
 RunScript Data/openjournal.wsp
 Update
