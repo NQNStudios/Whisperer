@@ -4,6 +4,7 @@ LoadText Data/Chapter4/text.wsp
 LoadImage tree Data/Chapter4/felltree-scaled.png
 LoadImage deaddogs Data/Chapter4/deaddogs-scaled.png
 LoadImage barking Data/Chapter4/barking-scaled.png
+LoadImage wire Data/Chapter4/wire-scaled.png
 
 LoadGroupSound barking Data/Chapter4/snd_barking1.wav
 LoadGroupSound barking Data/Chapter4/snd_barking2.wav
@@ -191,9 +192,20 @@ FreeImage deaddogs
 
 BlitSurface laptop 0 0
 MakeDialog AkeleyEmail2P3 email 24 11 51 14 Instant
-MakeDialog AkeleyEmail2P4 email 24 15 51 14 Instant
 Update
 AwaitInput
+
+ClearTransparent
+AddBackgroundImage wire wire 0 0
+Update
+Wait 750
+
+MakeDialog AkeleyEmail2P4 emailbubble 20 34 60 5 Instant
+Update
+AwaitInput
+
+ClearImages
+FreeImage wire
 
 BlitSurface laptop 0 0
 BlitSurface reply 23 10
