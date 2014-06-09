@@ -17,7 +17,7 @@ StopLoopingGroup writing
 
 AwaitInput
 
-Explore Data/Chapter2/study.srf Data/player.srf carpetStep
+Explore Data/Chapter5/study.srf Data/player.srf carpetStep
 FreeSoundGroup carpetStep
 
 BlitSurface laptop 0 0
