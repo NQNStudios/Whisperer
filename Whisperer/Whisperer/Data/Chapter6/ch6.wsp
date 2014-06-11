@@ -35,11 +35,10 @@ Update
 Wait 500
 
 LoopSoundGroup writing
-MakeDialog P4.1 journal 21 23 28 29 Normal
-MakeDialog P4.2 journal 51 1 28 29 Normal
-MakeDialog P5 journal 51 4 28 29 Normal
-MakeDialog P6 journal 51 13 28 29 Normal
-MakeDialog P7 journal 51 18 28 29 Normal
+MakeDialog P4 journal 21 23 28 29 Normal
+MakeDialog P5 journal 51 1 28 29 Normal
+MakeDialog P6 journal 51 10 28 29 Normal
+MakeDialog P7 journal 51 15 28 29 Normal
 StopLoopingGroup writing
 
 AwaitInput
