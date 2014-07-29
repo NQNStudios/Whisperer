@@ -343,7 +343,7 @@ void RunLine(const char* line)
 		cmdstream << "RunScript Data/Chapter" << chapter << "/ch" << chapter << ".wsp";
 
 		char* cstr = new char [cmdstream.str().length()+1];
-		std::strcpy (cstr, cmdstream.str().c_str());
+		strcpy (cstr, cmdstream.str().c_str());
 
 		linesToExecute.push_back(cstr);
 		Ready();
@@ -847,7 +847,7 @@ void RunLine(const char* line)
 
 		scrollingText = true;
 		textToScroll = text[textKey];
-		scrollStream = std::stringstream(textToScroll);
+		scrollStream.str(textToScroll);
 		textScrolled = "";
 		revealedChars = 0;
 		charsToReveal = 0;
@@ -985,7 +985,7 @@ void StartChapter(int chapter)
 	sstream << "RunScript Data/Chapter" << chapter << "/ch" << chapter << ".wsp";
 
 	char* cstr = new char [sstream.str().length()+1];
-	std::strcpy (cstr, sstream.str().c_str());
+	strcpy (cstr, sstream.str().c_str());
 
 	linesToExecute.push_back(cstr);
 }
