@@ -42,6 +42,7 @@ EXECUTABLE=asciitest
 
 all: $(EXECUTABLE)
 	cp Whisperer/Whisperer/terminal.fon bin
+	cp Whisperer/Whisperer/Data bin
 
 # Pastes in all of the Make rules inside of the generated .d files.
 # Rules are of the format (file.o: file.cc header1.h header2.h)
